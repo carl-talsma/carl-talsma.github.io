@@ -1,0 +1,27 @@
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+  line-height: 1.6;
+  color: #222;
+}
+
+header {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 40px;
+}
+
+nav a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #007acc;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+h1, h2 {
+  line-height: 1.2;
+}
