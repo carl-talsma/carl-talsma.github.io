@@ -1,1 +1,10 @@
 *.DS_Store
+.DS_Store
+**/.DS_Store
+**/.ipynb_checkpoints
+**/__pycache__/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.vscode/
+**/.idea/
+**/.ipynb_checkpoints/
