@@ -55,7 +55,18 @@ But wait! These models are still being trained on synthetic data! You might be s
 
 <p>
 Our approach was to cater our product toward early and fast detection for oil and gas operators and less toward the quantification of the emissions rate. Companies like Carbon Mapper, who had won contracts with the federal government to quantify methane for the basis of financial penalties, need accurate meteorology data which may take weeks to process. Our focus was to work with oil and gas operators to find leaks as quickly as possible, focusing on low-latency satellite products, so that they could fix leaks and avoid fines. It’s an interesting discussion around what makes data actionable and where you might make practical sacrifices in accuracy so that you can get real things done on the ground. That question is something that I feel really motivated by! Where can we find value in providing data that people need that doesn’t align exactly with what achieves the best validation statistics. 
+Here is a video of me presenting on some of this work!
 </p>
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/v=p9E4RWedXqU"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+</iframe>
 
 <img width="100%">
 
@@ -206,7 +217,7 @@ The following figure shows the feature importances for the input meteorology par
 <img src="../assets/figures/frost/featureImportance.jpg" width="100%">
 
 <p>
-While we were able to create models using the Alcalde station data that outperformed the numerical weather forecast (RMSE=) for the station location. The results of the tranfer learning did not work so well. The model failed to achieve the same performance after continuing to train the model on the Freshies farm data. While we designed these models to be compact enough to run on the edge, more complex models could make use of numerical weather forecasts or weather station data from a wider network of stations. I think this project illustrated how ML can be used to create custom solutions with greater specificity than you might get from tradition weather prediction methods. 
+While we were able to create models using the Alcalde station data that outperformed the numerical weather forecast (6-h RMSE = 2-3°C) for the station location. The results of the tranfer learning did not work so well. The model failed to achieve the same performance after continuing to train the model on the Freshies farm data. While we designed these models to be compact enough to run on the edge, more complex models could make use of numerical weather forecasts or weather station data from a wider network of stations. I think this project illustrated how ML can be used to create custom solutions with greater specificity than you might get from tradition weather prediction methods. 
 </p>
 
 <section id="kshortest">
@@ -216,9 +227,34 @@ At Carbon Solutions, the framework we rely on for pipeline routing produces the 
 </p>
 
 <p>
-The algorithm for generating the k-shortest routes is pretty simple. Called Yen’s algorithm, it eliminates nodes one-by-one and re-runs Dijkstra’s algorithm between each iteration until it eventually comes up with an exact solution for the k-shortest paths. However, this ends up being extremely time-intensive and paths often differ by only a single node. What we actually want is to introduce a limited overlap parameter into our algorithm. Think about routing in google maps. I don’t want to see two routes that only differ by one or two blocks when I’m driving. A real decision goes something like “do I take the absolute fastest route, or do I want to take the scenic route that is 10 minutes slower”. The variety of options presented is sometimes more important than the exactness of the solution. The problem can be described by k-shortest paths with limited overlap or kSPwLO algorithms. 
+The algorithm for generating the k-shortest routes is pretty simple.
+Called Yen’s algorithm, it eliminates nodes one-by-one and re-runs Dijkstra’s algorithm between each iteration until it eventually comes up with an exact solution for the k-shortest paths.
+However, this ends up being extremely time-intensive and paths often differ by only a single node. 
+What we actually want is to introduce a limited overlap parameter into our algorithm. 
+Think about routing in google maps. I don’t want to see two routes that only differ by one or two blocks when I’m driving. 
+A real decision goes something like “do I take the absolute fastest route, or do I want to take the scenic route that is 10 minutes slower”. 
+The variety of options presented is sometimes more important than the exactness of the solution. 
+The problem can be described by k-shortest paths with limited overlap or kSPwLO algorithms. 
 </p>
 
+<p>
+We utilize the ESX algorithm for kSPwLO which is a modification of Yen’s algorithm that introduces a limited overlap parameter and an priority queue to produce approximate solutions much more quickly.
+The prioritizaiton queue is essentially a set of heuristics for eliminating nodes. Here is an example pipeline routes produced using the ESX algorithm for different values of k.
+</p>
+
+<p>
+
+</p>
+
+<iframe
+  width="560"
+  height="315"
+  src="https://www.youtube.com/embed/v=onjGevTBz4E"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+</iframe>
 
 </section>
 
