@@ -8,94 +8,116 @@
 <body>
 
 <header>
-  <h1>Carl Talsma | Projects</h1>
+  <h1>Carl Talsma</h1>
   <p>Geospatial Data Scientist | Climate & Energy | Hydrology</p>
   <nav>
     <a href="../index.html"> Home</a>
     <a href="../assets/cv/">CV</a>
     <a href="index.html">Projects</a>
+    <a href="../Media/index.html">Media</a>
     <a href="../index.html#contact">Contact</a>
     <a href="../index.html#about">About</a>
   </nav>
 </header>
 
 <section id="crb">
-<h1>Analyzing Watershed Behavior in a Changing Climate</h1>
+  <div class="layout">
+  
+    <div class="main-content">
+      <h1>Analyzing Watershed Behavior in a Changing Climate</h1>
 
-<p>
-At LANL, I worked on several projects that used future climate projection from Earth System Models (ESMs) as inputs into hydrologic models. This tells us how the hydrology of a watershed will change in the future due to climate change. We did this for the Colorado River Basin (CRB), but you end up with a lot of gridded output data that can be difficult to interpret. To deal with this I ran an unsupervised clustering algorithm on sub-watershed within the CRB basins to determine how different areas within the CRB exhibited similar behavior or similar changes in behavior. 
-</p>
+      <p>
+      At LANL, I worked on several projects that used future climate projection from Earth System Models (ESMs) as inputs into hydrologic models. This tells us how the hydrology of a watershed will change in the future due to climate change. We did this for the Colorado River Basin (CRB), but you end up with a lot of gridded output data that can be difficult to interpret. To deal with this I ran an unsupervised clustering algorithm on sub-watershed within the CRB basins to determine how different areas within the CRB exhibited similar behavior or similar changes in behavior. 
+      </p>
 
-<img src="../assets/figures/NMFk/crb_map.png" width="100%">
-<p>
-We used the NMFk (Non-negative matrix factorization using k-means) algorithm, which our team developed in the Julia programming language (<a href="https://github.com/SmartTensors/NMFk.jl">link</a>). Let’s start by explaining how the algorithm works. We start with a feature dataset. In our case we have a 3d dataset of 6 drought indicators across 134 sub watersheds for 73 5-day periods throughout the year (6x134x73).
-The fundamental task of NMF is to decompose a data matrix <math><mi>X</mi><mo>∈</mo> <mi>R</mi><sup><mi>m</mi><mo>x</mo><mi>n</mi></sup></math> (a matrix of real numbers, R, with dimensions <math><mi>m</mi><mo>x</mo><mi>n</mi></math>) into two non-negative matrices <math><mi>W</mi><mo>∈</mo> <mi>R</mi><sup><mi>m</mi><mo>x</mo><mi>k</mi></sup><mo>&#8896</mo><mi>H</mi><mo>∈</mo> <mi>R</mi><sup><mi>k</mi><mo>x</mo><mi>n</mi></sup></math> so that
-</p>
-<p>
-<math display="block">
-  <mi>X</mi>
-  <mo>=</mo>
-  <mi>W</mi>
-  <mo>x</mo>
-  <mi>H</mi> 
-</math>
+      <p>
+      We used the NMFk (Non-negative matrix factorization using k-means) algorithm, which our team developed in the Julia programming language (<a href="https://github.com/SmartTensors/NMFk.jl">link</a>). Let’s start by explaining how the algorithm works. We start with a feature dataset. In our case we have a 3d dataset of 6 drought indicators across 134 sub watersheds for 73 5-day periods throughout the year (6x134x73).
+      The fundamental task of NMF is to decompose a data matrix <math><mi>X</mi><mo>∈</mo> <mi>R</mi><sup><mi>m</mi><mo>x</mo><mi>n</mi></sup></math> (a matrix of real numbers, R, with dimensions <math><mi>m</mi><mo>x</mo><mi>n</mi></math>) into two non-negative matrices <math><mi>W</mi><mo>∈</mo> <mi>R</mi><sup><mi>m</mi><mo>x</mo><mi>k</mi></sup><mo>&#8896</mo><mi>H</mi><mo>∈</mo> <mi>R</mi><sup><mi>k</mi><mo>x</mo><mi>n</mi></sup></math> so that
+      </p>
+      <p>
+      <math display="block">
+        <mi>X</mi>
+        <mo>=</mo>
+        <mi>W</mi>
+        <mo>x</mo>
+        <mi>H</mi> 
+      </math>
 
-</p>
-<p>
-In our case, <math><mi>m</mi></math> is the number of sub-watersheds (134 HUC8 sub-watersheds), and <math><mi>n</mi></math> is the number of 5-day time periods throughout the year (73).
- Note that <math><mi>k</mi></math> is a positive integer (less than <math><mi>min(m,n)</mi></math>) defining the unknown number of original features (signals) hidden in the data (<a href="https://pubmed.ncbi.nlm.nih.gov/17716011/">Lin, 2007</a>).
- Here, a feature or signal is a unique temporal behavior that is identified among the 134 sub-watersheds but could be more broadly defined for other applications as any unique pattern of data present within a data matrix.
-<math><mi>W</mi></math> is often regarded as the feature matrix (i.e., representing the unique signals or features present the original data), and <math><mi>H</mi></math> is called the mixing matrix capturing how the signals are mixed at each watershed.
-The following animation shows how the NMFk algorithm iteratively decomposes the original data matrix into the feature and mixing matrices.
-</p>
+      </p>
+      <p>
+      In our case, <math><mi>m</mi></math> is the number of sub-watersheds (134 HUC8 sub-watersheds), and <math><mi>n</mi></math> is the number of 5-day time periods throughout the year (73).
+      Note that <math><mi>k</mi></math> is a positive integer (less than <math><mi>min(m,n)</mi></math>) defining the unknown number of original features (signals) hidden in the data (<a href="https://pubmed.ncbi.nlm.nih.gov/17716011/">Lin, 2007</a>).
+      Here, a feature or signal is a unique temporal behavior that is identified among the 134 sub-watersheds but could be more broadly defined for other applications as any unique pattern of data present within a data matrix.
+      <math><mi>W</mi></math> is often regarded as the feature matrix (i.e., representing the unique signals or features present the original data), and <math><mi>H</mi></math> is called the mixing matrix capturing how the signals are mixed at each watershed.
+      The following animation shows how the NMFk algorithm iteratively decomposes the original data matrix into the feature and mixing matrices.
+      </p>
 
-<img src="../assets/figures/NMFk/m643.gif" width="100%">
+      <p>
+      NMFk computes solutions for all possible numbers of signals <mi>k</mi> ranging from 1 to d (less than <math><mi>min(m,n)</mi></math>) and then estimates the accuracy and robustness of these solution sets for different values of <mi>k</mi>.
+      For each <mi>k</mi> value, the robustness is estimated in NMFk by performing a series of NMF runs (e.g., 1,000) with random initial guesses W and H elements.
+        After that, the series of NMF solutions are grouped using a custom semi-supervised k-means clustering.
+        The customization to the original algorithm is to keep the number of solutions in each cluster equal to the number of NMF runs (e.g., 1,000).
+        The clustering is applied to measure how good a particular number of extracted signals, <mi>k</mi>, is to accurately and robustly describe the original data.
+        The optimal number of signals <mi>k</mi><sub><mi>opt</mi></sub> is estimated automatically by the NMFk algorithm. A detailed description of NMFk can be found in Vesselinov et al.
+        (<a href="https://www.sciencedirect.com/science/article/abs/pii/S0169772217301201?via%3Dihub">2018</a>).
+        The figure below shows how NMFk is applied to the temporal dataset and what the geographic output might look like.
+      </p>
 
-<p>
-NMFk computes solutions for all possible numbers of signals <mi>k</mi> ranging from 1 to d (less than <math><mi>min(m,n)</mi></math>) and then estimates the accuracy and robustness of these solution sets for different values of <mi>k</mi>.
- For each <mi>k</mi> value, the robustness is estimated in NMFk by performing a series of NMF runs (e.g., 1,000) with random initial guesses W and H elements.
-  After that, the series of NMF solutions are grouped using a custom semi-supervised k-means clustering.
-  The customization to the original algorithm is to keep the number of solutions in each cluster equal to the number of NMF runs (e.g., 1,000).
-  The clustering is applied to measure how good a particular number of extracted signals, <mi>k</mi>, is to accurately and robustly describe the original data.
-  The optimal number of signals <mi>k</mi><sub><mi>opt</mi></sub> is estimated automatically by the NMFk algorithm. A detailed description of NMFk can be found in Vesselinov et al.
-  (<a href="https://www.sciencedirect.com/science/article/abs/pii/S0169772217301201?via%3Dihub">2018</a>).
-  The figure below shows how NMFk is applied to the temporal dataset and what the geographic output might look like.
-</p>
+      <p>
+      At the most basic level, we are sorting the annual temporal behavior of the sub-watersheds into similar groups based on drought indicators like evaporation, soil moisture, and runoff. We do this for two 30-year time periods representing historical (1970-1999) and future (2070-2099) behavior as well as the change between the two period (delta). The output from NMFk shows us where geographically and when during the annual cycle we might see changes in drought behavior. 
+      </p>
 
-<img src="../assets/figures/NMFk/workflow_fig.png" width="100%">
+      <p>
+        Here is an example of what the output looks like for runoff for each of the temporal periods and geographically.
+      </p>
 
-<p>
-At the most basic level, we are sorting the annual temporal behavior of the sub-watersheds into similar groups based on drought indicators like evaporation, soil moisture, and runoff. We do this for two 30-year time periods representing historical (1970-1999) and future (2070-2099) behavior as well as the change between the two period (delta). The output from NMFk shows us where geographically and when during the annual cycle we might see changes in drought behavior. 
-</p>
+      <p>
+        What you can see immediately is that th snowmelt signal in the spring is shifting earlier in the yellow and red watersheds.
+        The change figure shows how runoff will increase earlier in the year and decrease in late spring when snowmelt is typically at its peak.
+        We can also see geographically that this behavior matches the high elevation sub watershed in the san juan mountains where snowmelt is dominant.
+        The finding is not unexpected bu the algorithm allows us to cluster these watershed geographically based on their temporal behavior and then simplify additional analysis on snowmelt characteristics.
+      </p>
 
-<p>
-  Here is an example of what the output looks like for runoff for each of the temporal periods and geographically.
-</p>
+      <p>
+        Here are a few more of these figures showing the output of NMFk both temporally and geographically for show. 
+        Missing panels represent instances where the algorithm did not converge on a solution with distinct temporal behavior.
+        These take a bit of staring at to interpret but if you want to read our interpretation check out our publicaton: 
+        <p><i>Characterizing Drought Behavior in the Colorado River Basin Using Unsupervised Machine Learning</i> | <a href= "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2021EA002086"> LINK</a>
+      </p>
+      </p>
 
-<img src="../assets/figures/NMFk/runoff_output.png" width="100%">
+    </div>
 
-<p>
-  What you can see immediately is that th snowmelt signal in the spring is shifting earlier in the yellow and red watersheds.
-  The change figure shows how runoff will increase earlier in the year and decrease in late spring when snowmelt is typically at its peak.
-  We can also see geographically that this behavior matches the high elevation sub watershed in the san juan mountains where snowmelt is dominant.
-  The finding is not unexpected bu the algorithm allows us to cluster these watershed geographically based on their temporal behavior and then simplify additional analysis on snowmelt characteristics.
-</p>
+    <div class="side-content">
+      <p>
+        <img src="../assets/figures/NMFk/crb_map.png" width="65%">
+      </p>
 
-<p>
-  Here are a few more of these figures showing the output of NMFk both temporally and geographically for show. 
-  Missing panels represent instances where the algorithm did not converge on a solution with distinct temporal behavior.
-  These take a bit of staring at to interpret but if you want to read our interpretation check out our publicaton: 
-  <a href="https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2021EA002086">Talsma et al., 2022</a>.
-</p>
+      <p>
+        <img src="../assets/figures/NMFk/m643.gif" width="80%">
+      </p>
 
-<p>
-  <img src="../assets/figures/NMFk/groups-3.png" width="100%">
-</p>
-<p>
-  <img src="../assets/figures/NMFk/5day_GFDL-ESM2G_chrono_groups-3.png" width="100%">
-</p>
+      <p>
+        <img src="../assets/figures/NMFk/workflow_fig.png" width="100%">
+      </p>
+
+      <p>
+        <img src="../assets/figures/NMFk/runoff_output.png" width="100%">
+      </p>
+
+      <p>
+        <img src="../assets/figures/NMFk/groups-3.png" width="100%">
+      </p>
+
+      <p>
+        <img src="../assets/figures/NMFk/5day_GFDL-ESM2G_chrono_groups-3.png" width="100%">
+      </p>
+
+    </div>
+  </div>
 
 </section>
+
 
 </body>
 </html>

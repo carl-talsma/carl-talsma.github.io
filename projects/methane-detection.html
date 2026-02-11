@@ -8,12 +8,13 @@
 <body>
 
 <header>
-  <h1>Carl Talsma | Projects</h1>
+  <h1>Carl Talsma</h1>
   <p>Geospatial Data Scientist | Climate & Energy | Hydrology</p>
   <nav>
     <a href="../index.html"> Home</a>
     <a href="../assets/cv/">CV</a>
     <a href="index.html">Projects</a>
+    <a href="../Media/index.html">Media</a>
     <a href="../index.html#contact">Contact</a>
     <a href="../index.html#about">About</a>
   </nav>
@@ -21,57 +22,61 @@
 
 
 <section id="methane">
-<h1>Methane Detection Platform</h1>
+  <div class="layout">
+    <div class="main-content">
+      <h1>Methane Detection Platform</h1>
 
-<p>
-I was awarded a Phase I SBIR award though <a href="https://www.sbir.gov/awards/207780">NOAA</a> to create a methane emissions detection and quantification platform, called MethanEDART (The Methane Emissions Detection and Resource management Toolkit). I lead the conception and proposal development for the project, securing funding through a competitive peer-revie process, and managed the technical, administrative, and reporting aspects of the grant. In a short six-month period, along with a team of scientists, I was able to successfully train machine learning algorithms on satellite data and physical models to detect and quantify methane plumes from natural gas and oil wells, processing facilities, and landfills. We built a working prototype of a web tool to eventually develop a licensable software product targeted at providing quick detection results to oil and gas operators. The following describes the project methods and machine learning in greater detail.
-</p>
+      <p>
+      I was awarded a Phase I SBIR award though <a href="https://www.sbir.gov/awards/207780">NOAA</a> to create a methane emissions detection and quantification platform, called MethanEDART (The Methane Emissions Detection and Resource management Toolkit). I lead the conception and proposal development for the project, securing funding through a competitive peer-revie process, and managed the technical, administrative, and reporting aspects of the grant. In a short six-month period, along with a team of scientists, I was able to successfully train machine learning algorithms on satellite data and physical models to detect and quantify methane plumes from natural gas and oil wells, processing facilities, and landfills. We built a working prototype of a web tool to eventually develop a licensable software product targeted at providing quick detection results to oil and gas operators. The following describes the project methods and machine learning in greater detail.
+      </p>
 
-<p>
-Methane detection using satellite data has a fairly robust set of literature and in the past several years as become a much more competitive field. When we originally applied for MethanEDART funding (2023), the need for a comprehensive methane detection platform was clear and achievable. The market has since evolved dramatically over the past several years to become a much more competitive market (see Carbon Mapper). The commercial case for methane detection was initially reinforced by Inflation Reduction Act incentives, then eroded following the rollback of methane penalties under the Trump administration.
-</p>
+      <p>
+      Methane detection using satellite data has a fairly robust set of literature and in the past several years as become a much more competitive field. When we originally applied for MethanEDART funding (2023), the need for a comprehensive methane detection platform was clear and achievable. The market has since evolved dramatically over the past several years to become a much more competitive market (see Carbon Mapper). The commercial case for methane detection was initially reinforced by Inflation Reduction Act incentives, then eroded following the rollback of methane penalties under the Trump administration.
+      </p>
 
-<p>
-But let's get to the fun data stuff! Methane is a strong absorber of light in the near infrared (NIR) with three distinct peaks of absorption all within the NIR spectrum of light. Fortunately, there are many satellite products that collect data in the near infrared including LANDSAT, Sentinel 2, EMIT, Tanager, MethaneSAT (lost in space!), and more. As with pretty much any other satellite data investigation, trade-offs between spectral, spatial, and temporal resolution are important with hyperspectral products from instruments like EMIT offering hyperspectral bands at a high spatial resolution that are great for detecting Methane, but with relative longer periods of repeated overpasses. Other products, like Sentinel 2, offer more frequent overpasses (~once very 5 days) but with only 2 large bands within the requisite NIR absorption wavelengths. To pinpoint facility emissions, we need at least a spatial resolution of 100m. We started out using EMIT and Sentinel 2 data but many many more satellite products work for methane detection and which to choose depends both on your use case and who uses the product at the end of the day (science, government, or industry). 
-</p>
-<img width="100%">
+      <p>
+      But let's get to the fun data stuff! Methane is a strong absorber of light in the near infrared (NIR) with three distinct peaks of absorption all within the NIR spectrum of light. Fortunately, there are many satellite products that collect data in the near infrared including LANDSAT, Sentinel 2, EMIT, Tanager, MethaneSAT (lost in space!), and more. As with pretty much any other satellite data investigation, trade-offs between spectral, spatial, and temporal resolution are important with hyperspectral products from instruments like EMIT offering hyperspectral bands at a high spatial resolution that are great for detecting Methane, but with relative longer periods of repeated overpasses. Other products, like Sentinel 2, offer more frequent overpasses (~once very 5 days) but with only 2 large bands within the requisite NIR absorption wavelengths. To pinpoint facility emissions, we need at least a spatial resolution of 100m. We started out using EMIT and Sentinel 2 data but many many more satellite products work for methane detection and which to choose depends both on your use case and who uses the product at the end of the day (science, government, or industry). 
+      </p>
+      
 
-<p>
-Next, we have to train a model to turn the satellite data into useful information regarding methane (detection or quantification). Unfortunately, there’s not much ground-based observations of methane concentration values that we can use. Most of the literature depends on physical models of methane plumes to train ML models, which then get used to detect real plumes. Once we have a physical model that can generate realistic methane plumes, we can embed that plume into real satellite imagery using Beer’s law which relates the concentration of a gas within a column to the absorption of light by the gas in the column. We then train a neural network on the embedded imagery to output the pixel concentration or a classification of plume or no-plume. We chose to use a relatively simple gaussian plume model in order to produce a bunch of plumes under various meteorological and emissions conditions to create a very large dataset for training. The tradeoff here is that there are more complex plume models that would give us more realistic methane plumes, but given the time constraints of the project we chose to produce a bunch of simple plumes to produce a large training dataset in a relatively short amount of time.
-</p>
-<img width="100%">
+      <p>
+      Next, we have to train a model to turn the satellite data into useful information regarding methane (detection or quantification). Unfortunately, there’s not much ground-based observations of methane concentration values that we can use. Most of the literature depends on physical models of methane plumes to train ML models, which then get used to detect real plumes. Once we have a physical model that can generate realistic methane plumes, we can embed that plume into real satellite imagery using Beer’s law which relates the concentration of a gas within a column to the absorption of light by the gas in the column. We then train a neural network on the embedded imagery to output the pixel concentration or a classification of plume or no-plume. We chose to use a relatively simple gaussian plume model in order to produce a bunch of plumes under various meteorological and emissions conditions to create a very large dataset for training. The tradeoff here is that there are more complex plume models that would give us more realistic methane plumes, but given the time constraints of the project we chose to produce a bunch of simple plumes to produce a large training dataset in a relatively short amount of time.
+      </p>
 
-<p>
-We trained several UNET convolution neural networks (CNNs) to output the pixel concentration of methane, a classification of plume or no plume, and the emissions centroid. UNETS are widely used in computer vision and imagery analysis problems because of their ability to interpret different features within the image as the convolution travels along the “decoder” or “contracting” path and then reconstructs the desired output along the “encoder” or “expanding” path to preserve the structure of the original image. My opinion is that this doesn’t matter much for the detection problem which relies mostly on the spectral pixel information. However, if we want to determine the emissions rate from a single facility which is producing a large methane plume, the structure of the plume ends up being very important and using a model that can learn from the shape of the plume is a big advantage. 
-</p>
-<img width="100%">
+      <p>
+      We trained several UNET convolution neural networks (CNNs) to output the pixel concentration of methane, a classification of plume or no plume, and the emissions centroid. UNETS are widely used in computer vision and imagery analysis problems because of their ability to interpret different features within the image as the convolution travels along the “decoder” or “contracting” path and then reconstructs the desired output along the “encoder” or “expanding” path to preserve the structure of the original image. My opinion is that this doesn’t matter much for the detection problem which relies mostly on the spectral pixel information. However, if we want to determine the emissions rate from a single facility which is producing a large methane plume, the structure of the plume ends up being very important and using a model that can learn from the shape of the plume is a big advantage. 
+      </p>
 
-<p>
-Our results of training the models are encouraging, and the models predict both the plume concentration and plume mask extremely well. For the concentration of methane, you can see the model is missing some pixels at the low end of methane concentration in the figure below. The model also starts to under-predict the methane concentration at the highest concentrations. This is likely to pixel saturation where methane starts absorbing most of the light within the band. When inferring the emissions rate, the model still perform well but the spread in the data is more apparent. This makes sense. Determining how much methane is emitted from a point source is a lot more complicate and depends on wind speed, atmospheric stability, and other factors that will introduce a lot more noise into the data. 
-</p>
+      <p>
+      Our results of training the models are encouraging, and the models predict both the plume concentration and plume mask extremely well. For the concentration of methane, you can see the model is missing some pixels at the low end of methane concentration in the figure below. The model also starts to under-predict the methane concentration at the highest concentrations. This is likely to pixel saturation where methane starts absorbing most of the light within the band. When inferring the emissions rate, the model still perform well but the spread in the data is more apparent. This makes sense. Determining how much methane is emitted from a point source is a lot more complicate and depends on wind speed, atmospheric stability, and other factors that will introduce a lot more noise into the data. 
+      </p>
 
-<p>
-But wait! These models are still being trained on synthetic data! You might be skeptical of how these models might preform in the real world and you’d be correct. This problem ends up being a major sticking point for the entire field and one that we didn’t quite get to in our 6-month timeline. The standard way to validate these models on real world data is through controlled release experiments, where someone wheels a tank out into the field and releases methane at a constant rate timed with satellite overpasses. You can imagine that this doesn’t happen often and requires releasing large amounts of methane into the atmosphere, not exactly ideal. Other options are to compare against aerial data and models that rely on similar techniques. 
-</p>
+      <p>
+      But wait! These models are still being trained on synthetic data! You might be skeptical of how these models might preform in the real world and you’d be correct. This problem ends up being a major sticking point for the entire field and one that we didn’t quite get to in our 6-month timeline. The standard way to validate these models on real world data is through controlled release experiments, where someone wheels a tank out into the field and releases methane at a constant rate timed with satellite overpasses. You can imagine that this doesn’t happen often and requires releasing large amounts of methane into the atmosphere, not exactly ideal. Other options are to compare against aerial data and models that rely on similar techniques. 
+      </p>
 
-<p>
-Our approach was to cater our product toward early and fast detection for oil and gas operators and less toward the quantification of the emissions rate. Companies like Carbon Mapper, who had won contracts with the federal government to quantify methane for the basis of financial penalties, need accurate meteorology data which may take weeks to process. Our focus was to work with oil and gas operators to find leaks as quickly as possible, focusing on low-latency satellite products, so that they could fix leaks and avoid fines. It’s an interesting discussion around what makes data actionable and where you might make practical sacrifices in accuracy so that you can get real things done on the ground. That question is something that I feel really motivated by! Where can we find value in providing data that people need that doesn’t align exactly with what achieves the best validation statistics. 
-Here is a video of me presenting on some of this work!
-</p>
+      <p>
+      Our approach was to cater our product toward early and fast detection for oil and gas operators and less toward the quantification of the emissions rate. Companies like Carbon Mapper, who had won contracts with the federal government to quantify methane for the basis of financial penalties, need accurate meteorology data which may take weeks to process. Our focus was to work with oil and gas operators to find leaks as quickly as possible, focusing on low-latency satellite products, so that they could fix leaks and avoid fines. It’s an interesting discussion around what makes data actionable and where you might make practical sacrifices in accuracy so that you can get real things done on the ground. That question is something that I feel really motivated by! Where can we find value in providing data that people need that doesn’t align exactly with what achieves the best validation statistics. 
+      Here is a video of me presenting on some of this work!
+      </p>
 
-<div class="video-container">
-  <iframe
-    width="912"
-    height="515"
-    src="https://www.youtube-nocookie.com/embed/p9E4RWedXqU"
-    title="Methane Detection Platform Demo"
-    allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-    allowfullscreen>
-  </iframe>
-</div>
-
-<img width="100%">
-
+      <div class="video-container">
+        <iframe
+          width="912"
+          height="515"
+          src="https://www.youtube-nocookie.com/embed/p9E4RWedXqU"
+          title="Methane Detection Platform Demo"
+          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+    <div class="side-content">
+      <img width="100%">
+      <img width="100%">
+      <img width="100%">
+    </div>
+  </div>
 </section>
 
 </body>

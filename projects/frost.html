@@ -8,54 +8,65 @@
 <body>
 
 <header>
-  <h1>Carl Talsma | Projects</h1>
+  <h1>Carl Talsma</h1>
   <p>Geospatial Data Scientist | Climate & Energy | Hydrology</p>
   <nav>
     <a href="../index.html"> Home</a>
     <a href="../assets/cv/">CV</a>
     <a href="index.html">Projects</a>
+    <a href="../Media/index.html">Media</a>
     <a href="../index.html#contact">Contact</a>
     <a href="../index.html#about">About</a>
   </nav>
 </header>
 
 <section id="frost">
-<h1>Machine Learning for Frost Prediction</h1>
+  <div class="layout">
+  
+    <div class="main-content">
+      <h1>Machine Learning for Frost Prediction</h1>
 
+      <p>
+      At Los Alamos, I was a part of a team of scientist funded through state grants to help local apricot farmers deal with seasonal frost mitigation. Weather can be variable in New Mexico during the spring, where the climate can either be sunny and hot or weather systems can bring in winter storms late in the spring. Further, complex topography tends to contribute toward cold-air pooling, where cold air funnels overnight into low lying areas create large disparities in temperature depending on small changes in topography. Late frost events can cause frost damage in budding apricots which destroys the yield for that year and temperature can vary widely across even a single farm. 
+      </p>
 
-<p>
-At Los Alamos, I was a part of a team of scientist funded through state grants to help local apricot farmers deal with seasonal frost mitigation. Weather can be variable in New Mexico during the spring, where the climate can either be sunny and hot or weather systems can bring in winter storms late in the spring. Further, complex topography tends to contribute toward cold-air pooling, where cold air funnels overnight into low lying areas create large disparities in temperature depending on small changes in topography. Late frost events can cause frost damage in budding apricots which destroys the yield for that year and temperature can vary widely across even a single farm. 
-</p>
+      <p>
+      Farmers deal with the frost in various ways through heated greenhouses, open barrel fires, or other mitigation efforts. However, some of these mitigation techniques are costly and knowing when to use them or not can be a stressful decision point for farmers. We had been collecting data for individual farms for several years and implemented a push notification system for alerting farmers when the temperature dropped below a certain threshold. We set out to determine if we could use this data to train custom models that would predict the temperature at the farm and could give advanced warning of low-temperature events that might damage crops. We started with station data from an established weather station in Alcalde and then attempted to transfer the model to a local farm (called “Freshies”) where we continued to train the model on data that we had collected.
+      </p>
 
-<p>
-Farmers deal with the frost in various ways through heated greenhouses, open barrel fires, or other mitigation efforts. However, some of these mitigation techniques are costly and knowing when to use them or not can be a stressful decision point for farmers. We had been collecting data for individual farms for several years and implemented a push notification system for alerting farmers when the temperature dropped below a certain threshold. We set out to determine if we could use this data to train custom models that would predict the temperature at the farm and could give advanced warning of low-temperature events that might damage crops. We started with station data from an established weather station in Alcalde and then attempted to transfer the model to a local farm (called “Freshies”) where we continued to train the model on data that we had collected.
-</p>
+      <p>
+      We trained both random forest models and a couple of simple neural network configurations to predict the temperature at various intervals. We chose to predict temperature, rather than frost events, because damage occurs at different temperature at different times during the bud development and the bud can actually harden against frost if the beginning stages of development are particularly cold. Damage from heat can also occur during the summer months, which wasn’t a primary concern for this project but nonetheless a consideration. I do report an F1 score in addition to regression statistics to illustrate how we might judge performance of the alert system if we were to set a “damage threshold”.
+      </p>
 
-<p>
-We trained both random forest models and a couple of simple neural network configurations to predict the temperature at various intervals. We chose to predict temperature, rather than frost events, because damage occurs at different temperature at different times during the bud development and the bud can actually harden against frost if the beginning stages of development are particularly cold. Damage from heat can also occur during the summer months, which wasn’t a primary concern for this project but nonetheless a consideration. I do report an F1 score in addition to regression statistics to illustrate how we might judge performance of the alert system if we were to set a “damage threshold”.
-</p>
+      <p>
+      Here's a scatter plot showing model performance for both the random forest and CNN configurations at a 6 hour lead time and a 24 hour lead time.
+      </p>
 
-<p>
-Here's a scatter plot showing model performance for both the random forest and CNN configurations at a 6 hour lead time and a 24 hour lead time.
-</p>
+      <p>
+      And here's what the model output looks as a time series. We used a time series split for training so that the model was not exposed to the most recent 20% of the data.
+      </p>
 
-<img src="../assets/figures/frost/scatter.jpg" width="100%">
+      <p>
+      The following figure shows the feature importances for the input meteorology parameter at each lead time. What's really interesting here is that relative importance of the features changes as the lead times get longer. Soil temperature becomes much more important at longer lead times, likely because of the high thermal inertia of the ground/soil. 
+      </p>
 
-<p>
-And here's what the model output looks as a time series. We used a time series split for training so that the model was not exposed to the most recent 20% of the data.
-</p>
+      <p>
+      While we were able to create models using the Alcalde station data that outperformed the numerical weather forecast (6-h RMSE = 2-3°C) for the station location. The results of the tranfer learning did not work so well. The model failed to achieve the same performance after continuing to train the model on the Freshies farm data. While we designed these models to be compact enough to run on the edge, more complex models could make use of numerical weather forecasts or weather station data from a wider network of stations. I think this project illustrated how ML can be used to create custom solutions with greater specificity than you might get from tradition weather prediction methods. 
+      </p>
 
-<img src="../assets/figures/frost/timeSeries.jpg" width="100%">
+      <p>
+        <p>Publication: <i>Frost Prediction using Machine Learning and Deep Neural Network Models</i> | <a href="https://www.frontiersin.org/journals/artificial-intelligence/articles/10.3389/frai.2022.963781/full"> LINK</a></p> 
+      </p>
+    </div>
 
-<p>
-The following figure shows the feature importances for the input meteorology parameter at each lead time. What's really interesting here is that relative importance of the features changes as the lead times get longer. Soil temperature becomes much more important at longer lead times, likely because of the high thermal inertia of the ground/soil. 
-</p>
+    <div class="side-content">
+      <img src="../assets/figures/frost/scatter.jpg" width="75%">
 
-<img src="../assets/figures/frost/featureImportance.jpg" width="100%">
+      <img src="../assets/figures/frost/timeSeries.jpg" width="75%">
 
-<p>
-While we were able to create models using the Alcalde station data that outperformed the numerical weather forecast (6-h RMSE = 2-3°C) for the station location. The results of the tranfer learning did not work so well. The model failed to achieve the same performance after continuing to train the model on the Freshies farm data. While we designed these models to be compact enough to run on the edge, more complex models could make use of numerical weather forecasts or weather station data from a wider network of stations. I think this project illustrated how ML can be used to create custom solutions with greater specificity than you might get from tradition weather prediction methods. 
-</p>
+      <img src="../assets/figures/frost/featureImportance.jpg" width="85%">
+
+    </div>
 </section>
 
 </body>
