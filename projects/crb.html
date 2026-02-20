@@ -54,6 +54,10 @@
       </p>
 
       <p>
+        <img src="../assets/figures/NMFk/m643.gif" width="80%" class="center">
+      </p>
+
+      <p>
       NMFk computes solutions for all possible numbers of signals <mi>k</mi> ranging from 1 to d (less than <math><mi>min(m,n)</mi></math>) and then estimates the accuracy and robustness of these solution sets for different values of <mi>k</mi>.
       For each <mi>k</mi> value, the robustness is estimated in NMFk by performing a series of NMF runs (e.g., 1,000) with random initial guesses W and H elements.
         After that, the series of NMF solutions are grouped using a custom semi-supervised k-means clustering.
@@ -65,11 +69,19 @@
       </p>
 
       <p>
-      At the most basic level, we are sorting the annual temporal behavior of the sub-watersheds into similar groups based on drought indicators like evaporation, soil moisture, and runoff. We do this for two 30-year time periods representing historical (1970-1999) and future (2070-2099) behavior as well as the change between the two period (delta). The output from NMFk shows us where geographically and when during the annual cycle we might see changes in drought behavior. 
+        <img src="../assets/figures/NMFk/workflow_fig.png" width="100%" class="center">
       </p>
 
       <p>
+      At the most basic level, we are sorting the annual temporal behavior of the sub-watersheds into similar groups based on drought indicators like evaporation, soil moisture, and runoff. We do this for two 30-year time periods representing historical (1970-1999) and future (2070-2099) behavior as well as the change between the two period (delta). The output from NMFk shows us where geographically and when during the annual cycle we might see changes in drought behavior. 
+      </p>
+
+      <p>å
         Here is an example of what the output looks like for runoff for each of the temporal periods and geographically.
+      </p>
+
+      <p>
+        <img src="../assets/figures/NMFk/runoff_output.png" width="60%" class="center">
       </p>
 
       <p>
@@ -85,6 +97,15 @@
         These take a bit of staring at to interpret but if you want to read our interpretation check out our publicaton: 
         <p><i>Characterizing Drought Behavior in the Colorado River Basin Using Unsupervised Machine Learning</i> | <a href= "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2021EA002086"> LINK</a>
       </p>
+
+      <p>
+        <img src="../assets/figures/NMFk/5day_GFDL-ESM2G_chrono_groups-3.png" width="100%" class="center">
+      </p>
+
+      <p>
+        <img src="../assets/figures/NMFk/groups-3.png" width="100%" class="center">
+      </p>
+
       </p>
 
     </div>
@@ -92,26 +113,6 @@
     <div class="side-content">
       <p>
         <img src="../assets/figures/NMFk/crb_map.png" width="65%">
-      </p>
-
-      <p>
-        <img src="../assets/figures/NMFk/m643.gif" width="80%">
-      </p>
-
-      <p>
-        <img src="../assets/figures/NMFk/workflow_fig.png" width="100%">
-      </p>
-
-      <p>
-        <img src="../assets/figures/NMFk/runoff_output.png" width="100%">
-      </p>
-
-      <p>
-        <img src="../assets/figures/NMFk/groups-3.png" width="100%">
-      </p>
-
-      <p>
-        <img src="../assets/figures/NMFk/5day_GFDL-ESM2G_chrono_groups-3.png" width="100%">
       </p>
 
     </div>

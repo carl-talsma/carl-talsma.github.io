@@ -43,13 +43,19 @@
       Here's a scatter plot showing model performance for both the random forest and CNN configurations at a 6 hour lead time and a 24 hour lead time.
       </p>
 
+      <img src="../assets/figures/frost/scatter.jpg" width="75%" class="center">
+
       <p>
       And here's what the model output looks as a time series. We used a time series split for training so that the model was not exposed to the most recent 20% of the data.
       </p>
 
+      <img src="../assets/figures/frost/timeSeries.jpg" width="75%" class="center">
+
       <p>
       The following figure shows the feature importances for the input meteorology parameter at each lead time. What's really interesting here is that relative importance of the features changes as the lead times get longer. Soil temperature becomes much more important at longer lead times, likely because of the high thermal inertia of the ground/soil. 
       </p>
+
+      <img src="../assets/figures/frost/featureImportance.jpg" width="85%" class="center">
 
       <p>
       While we were able to create models using the Alcalde station data that outperformed the numerical weather forecast (6-h RMSE = 2-3°C) for the station location. The results of the tranfer learning did not work so well. The model failed to achieve the same performance after continuing to train the model on the Freshies farm data. While we designed these models to be compact enough to run on the edge, more complex models could make use of numerical weather forecasts or weather station data from a wider network of stations. I think this project illustrated how ML can be used to create custom solutions with greater specificity than you might get from tradition weather prediction methods. 
@@ -60,14 +66,6 @@
       </p>
     </div>
 
-    <div class="side-content">
-      <img src="../assets/figures/frost/scatter.jpg" width="75%">
-
-      <img src="../assets/figures/frost/timeSeries.jpg" width="75%">
-
-      <img src="../assets/figures/frost/featureImportance.jpg" width="85%">
-
-    </div>
 </section>
 
 </body>

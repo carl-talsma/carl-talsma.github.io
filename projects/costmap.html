@@ -24,7 +24,7 @@
 <section id="costmap">
   <div class="layout">
   
-    <div class="main-content">
+    <div >
       <h1><i>CostMAP<sup>PRO</sup></i>: Pipeline Routing for CO<sub>2</sub> Transport</h1>
 
       <p>
@@ -43,6 +43,8 @@
       2. For every value in these datasets we assign both a cost weight (how does this feature impact the cost of building a pipeline) and a routing weight (do we want to route towards or away from this feature). For linear features, we tweak the weights based on if this is a barrier (impeded the pipeline, rivers) or a corridor (somewhere we’d like the pipeline to route, existing right-of-ways). We can assign weights based on unique values like landcover, or based on linear equations for continuous data like population density. 
       </p>
 
+      <img src="../assets/figures/costmap/cost_surfaces.png" width="100%">
+
       <p>
       3. Once we assign routing and cost weights, we produce both a routing and cost surface that incorporates each of the data sources into two surfaces. The cost surface describes how much a pipeline costs to build between pixels, and the routing surface describes how desirable or undesirable it is to build a pipeline between pixels (based on both cost and other factors outside of cost).
       </p>
@@ -50,6 +52,8 @@
       <p>
       4. Next, we use Dijkstra’s algorithm to route pipelines between nodes (see the animation below for a demonstration of how Dijkstra's algorithm works). Boom, we’ve got an optimized pipeline route that incorporates all of the data described above and the cost of building that pipeline. The output depends heavily on how we assign weights which is sometimes based on concrete data (the cost of building pipeline on a slope of X%) and sometimes based on less quantifiable factors (how amenable people are to a pipeline in their neighborhood). The process allows us to customize the weights to suit different problems or clients. 
       </p>
+
+      <img src="../assets/figures/costmap/Dijkstras_progress_animation.gif" class="center" width="60%">
 
       <p>
       The resulting pipeline routes can then be analyzed for river, road, and other crossings, population impacts, and cost. We use our software, SimCCS<sup>PRO</sup>, to optimize pipeline networks based on cost. The following webmap shows the end results of the CostMAP<sup>PRO</sup>-SimCCS<sup>PRO</sup> workflow for CCS scenario for non-industrial sources. The webmap is made using javascript and openlayers with data hosted on geoserver.
@@ -70,9 +74,8 @@
     </div>
 
     <div class="side-content">
-      <img src="../assets/figures/costmap/cost_surfaces.png" width="100%">
-
-      <img src="../assets/figures/costmap/Dijkstras_progress_animation.gif" width="60%">
+      
+      
     </div>
 </section>
 

@@ -42,7 +42,7 @@
 
       <p>
       We utilize the ESX algorithm for kSPwLO which is a modification of Yen’s algorithm that introduces a limited overlap parameter and an priority queue to produce approximate solutions much more quickly.
-      The prioritizaiton queue is essentially a set of heuristics for eliminating nodes. Here is an example pipeline routes produced using the ESX algorithm for different values of k and values of theta (the overlap factor).
+      The prioritizaiton queue is essentially a set of heuristics for eliminating nodes. The first figure to the right is an example pipeline routes produced using the ESX algorithm for different values of k and values of theta (the overlap factor).
       </p>
 
       <p>
@@ -54,7 +54,7 @@
 
       <p>
       We also assessed how using the algorithm might impact the cost of a project or the implementation of the projects.
-      The figure below shows the results of running our optimization software, SimCCS<sup>PRO</sup>, on the routes produced by the kSPwLO algorithm.
+      The second figure to the right shows the results of running our optimization software, SimCCS<sup>PRO</sup>, on the routes produced by the kSPwLO algorithm.
       We run the algorithm ten times using the same sources and sinks but with randomly selecting pipeline routes from the kSPwLO output for k=10.
       The blue pie charts represent how frequently a particular source deploys at different CO<sub>2</sub> capture volumes. 
       </p>
@@ -66,12 +66,16 @@
       The case study shows that the kSPwLO algorithm can produce a variety of routes that spatially deviate significantly from the optimal route but still have similar project costs.
       </p>
 
+      <img src="../assets/figures/k-shortest/Figure_5.png" width="70%" class="center">
+
       <p>
       Further, we developed a Pipeline Importance Index to analyze the chokepoints along the routes and determine which reaches of pipeline might be most important to a project from a developement perspective.
       The metric is based on the number of routes that pass through a given reach of pipeline and the routing how high up a node might be in the priority qeueu.
       If a node is high in the priority but also remains in many routes, we can determine that that in node is important to the project and might be a chokepoint that we want to analyze further.
       The image below shows the importance metric for a set of pipeline routes in Iowa.
       </p>
+
+      <img src="../assets/figures/k-shortest/Figure_6.png" width="70%" class="center">
 
       <p>
       I discuss the project in more detail in the video below...
@@ -94,10 +98,6 @@
       <img src="../assets/figures/k-shortest/Figure_2.png" width="70%">
 
       <img src="../assets/figures/k-shortest/Figure_3.png" width="70%">
-
-      <img src="../assets/figures/k-shortest/Figure_5.png" width="70%">
-
-      <img src="../assets/figures/k-shortest/Figure_6.png" width="70%">
 
     </div>
   </div>
