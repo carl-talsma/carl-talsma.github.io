@@ -48,20 +48,28 @@
       <p>
       But let's get to the fun data stuff! Methane is a strong absorber of light in the near infrared (NIR) with three distinct peaks of absorption all within the NIR spectrum of light. Fortunately, there are many satellite products that collect data in the near infrared including LANDSAT, Sentinel 2, EMIT, Tanager, MethaneSAT (lost in space!), and more. As with pretty much any other satellite data investigation, trade-offs between spectral, spatial, and temporal resolution are important with hyperspectral products from instruments like EMIT offering hyperspectral bands at a high spatial resolution that are great for detecting Methane, but with relative longer periods of repeated overpasses. Other products, like Sentinel 2, offer more frequent overpasses (~once very 5 days) but with only 2 large bands within the requisite NIR absorption wavelengths. To pinpoint facility emissions, we need at least a spatial resolution of 100m. We started out using EMIT and Sentinel 2 data but many many more satellite products work for methane detection and which to choose depends both on your use case and who uses the product at the end of the day (science, government, or industry). 
       </p>
-      
+
+      <img src ="../assets/figures/methaneDART/absorption.png" width="60%" class="center">
+
 
       <p>
       Next, we have to train a model to turn the satellite data into useful information regarding methane (detection or quantification). Unfortunately, there’s not much ground-based observations of methane concentration values that we can use. Most of the literature depends on physical models of methane plumes to train ML models, which then get used to detect real plumes. Once we have a physical model that can generate realistic methane plumes, we can embed that plume into real satellite imagery using Beer’s law which relates the concentration of a gas within a column to the absorption of light by the gas in the column. We then train a neural network on the embedded imagery to output the pixel concentration or a classification of plume or no-plume. We chose to use a relatively simple gaussian plume model in order to produce a bunch of plumes under various meteorological and emissions conditions to create a very large dataset for training. The tradeoff here is that there are more complex plume models that would give us more realistic methane plumes, but given the time constraints of the project we chose to produce a bunch of simple plumes to produce a large training dataset in a relatively short amount of time.
       </p>
 
+      <img src ="../assets/figures/methaneDART/methaneDART_workflow.png" width="60%" class="center">
+
       <p>
       We trained several UNET convolution neural networks (CNNs) to output the pixel concentration of methane, a classification of plume or no plume, and the emissions centroid. UNETS are widely used in computer vision and imagery analysis problems because of their ability to interpret different features within the image as the convolution travels along the “decoder” or “contracting” path and then reconstructs the desired output along the “encoder” or “expanding” path to preserve the structure of the original image. My opinion is that this doesn’t matter much for the detection problem which relies mostly on the spectral pixel information. However, if we want to determine the emissions rate from a single facility which is producing a large methane plume, the structure of the plume ends up being very important and using a model that can learn from the shape of the plume is a big advantage. 
       </p>
 
+      <img src ="../assets/figures/methaneDART/plume_prediction_9panel.png" width="100%" class="center">
       <p>
       Our results of training the models are encouraging, and the models predict both the plume concentration and plume mask extremely well. For the concentration of methane, you can see the model is missing some pixels at the low end of methane concentration in the figure below. The model also starts to under-predict the methane concentration at the highest concentrations. This is likely to pixel saturation where methane starts absorbing most of the light within the band. When inferring the emissions rate, the model still perform well but the spread in the data is more apparent. This makes sense. Determining how much methane is emitted from a point source is a lot more complicate and depends on wind speed, atmospheric stability, and other factors that will introduce a lot more noise into the data. 
       </p>
 
+      <img src ="../assets/figures/methaneDART/concentration_scatter.png" width="100%" class="center">
+
+      <img src ="../assets/figures/methaneDART/emissions_scatter.png" width="100%" class="center">
       <p>
       But wait! These models are still being trained on synthetic data! You might be skeptical of how these models might preform in the real world and you’d be correct. This problem ends up being a major sticking point for the entire field and one that we didn’t quite get to in our 6-month timeline. The standard way to validate these models on real world data is through controlled release experiments, where someone wheels a tank out into the field and releases methane at a constant rate timed with satellite overpasses. You can imagine that this doesn’t happen often and requires releasing large amounts of methane into the atmosphere, not exactly ideal. Other options are to compare against aerial data and models that rely on similar techniques. 
       </p>
@@ -80,7 +88,8 @@
           src="https://www.youtube-nocookie.com/embed/p9E4RWedXqU"
           title="Methane Detection Platform Demo"
           allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
+          allowfullscreen
+          width="center">
         </iframe>
       </div>
 
@@ -95,16 +104,17 @@
           src="https://apps.carbonsolutionsllc.com/methanedart/"
           title="Methane Detection Platform Demo"
           allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
+          allowfullscreen
+          width="center">
         </iframe>
       </div>
 
     </div>
     <div class="side-content">
-      <img src ="../assets/figures/methaneDART/methaneDART_workflow.png" width="100%">
-      <img src ="../assets/figures/methaneDART/plume_prediction_9panel.png" width="100%">
-      <img src ="../assets/figures/methaneDART/concentration_scatter.png" width="100%">
-      <img src ="../assets/figures/methaneDART/emissions_scatter.png" width="100%">
+      
+      
+      
+      
     </div>
   </div>
 </section>
