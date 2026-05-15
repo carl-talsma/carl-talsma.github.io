@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2026 Election Forecast — Electionizer 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+* { box-sizing: border-box; }
+body {
+  font-family: Georgia, serif;
+  background-color: #fafaf7;
+  color: #1a1a2e;
+  margin: 0;
+  padding: 0;
+}
+.site-header {
+  background: #1a1a2e;
+  color: white;
+  padding: 18px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.site-header h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.6rem;
+  margin: 0;
+  color: white;
+}
+.site-header .subtitle {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-top: 2px;
+}
+.site-header .nav a {
+  color: #ccc;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 0.9rem;
+}
+.site-header .nav a:hover { color: white; }
+.main-content {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+.section-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin: 36px 0 14px 0;
+  border-bottom: 2px solid #1a1a2e;
+  padding-bottom: 6px;
+}
+.card {
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  color: #666;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-family: Georgia, serif;
+}
+.back-link:hover { color: #1a1a2e; }
+.last-updated {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 4px;
+  font-family: Georgia, serif;
+}
+.legend-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 10px 0 20px 0;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  font-family: Georgia, serif;
+  color: #555;
+}
+.legend-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.tab-bar {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #1a1a2e;
+  margin: 8px 0 28px 0;
+}
+.tab-btn {
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  padding: 10px 28px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #888;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color: #1a1a2e; }
+.tab-btn.active {
+  color: #1a1a2e;
+  border-bottom: 3px solid #1a1a2e;
+}
+.map-hint {
+  font-family: Georgia, serif;
+  font-size: 0.78rem;
+  color: #888;
+  margin: 0 0 6px 0;
+  font-style: italic;
+}
+</style>
+</head>
+<body>
+<header class="site-header">
+  <div>
+    <h1>Electionizer 2026</h1>
+    <div class="subtitle">Election Forecast Model</div>
+  </div>
+  <nav class="nav">
+    <a href="intro.html">← Home</a>
+    <a href="#">All Races</a>
+  </nav>
+</header>
+<div class="main-content">
+  
+  <h1 style="font-family:'Playfair Display', Georgia, serif; font-size:2rem; font-weight:900;     color:#1a1a2e; margin:0 0 4px 0;">2026 Election Forecast</h1>
+<p style="color:#666; font-family:Georgia, serif; font-size:0.95rem; margin:0 0 24px 0;">Machine learning predictions for all 2026 Senate and Governor races.</p>
+<div class="tab-bar"><button class="tab-btn active" data-tab="senate" onclick="switchTab('senate')">Senate</button><button class="tab-btn" data-tab="governor" onclick="switchTab('governor')">Governors</button></div>
+<div id="tab-senate">
+<div class="card" style="padding:16px 24px 8px; margin-bottom:16px;">
+  <p style="font-family:'Playfair Display', Georgia, serif; font-size:0.85rem; font-weight:700;      color:#1a1a2e; margin:0 0 4px 0;">Senate Seat Control</p>
+<div>                        <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+        <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.4.0.min.js" integrity="sha256-KEmPoupLpFyGMyGAiOsiNDbKDKAvxXAn/W+oQa0ZAfk=" crossorigin="anonymous"></script>                <div id="senate-bar" class="plotly-graph-div" style="height:80px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("senate-bar")) {                    Plotly.newPlot(                        "senate-bar",                        [{"hovertemplate":"\u003cb\u003eD Hold\u003c\u002fb\u003e: 34 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#b0c8e8"},"name":"D Hold","orientation":"h","text":["\u003cb\u003eD Hold\u003c\u002fb\u003e\u003cbr\u003e34"],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[34],"y":["seats"],"type":"bar"},{"hovertemplate":"\u003cb\u003eSafe D\u003c\u002fb\u003e: 7 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#1a6bb5"},"name":"Safe D","orientation":"h","text":["\u003cb\u003eSafe D\u003c\u002fb\u003e\u003cbr\u003e7"],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[7],"y":["seats"],"type":"bar"},{"hovertemplate":"\u003cb\u003eLikely D\u003c\u002fb\u003e: 4 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#5b9bd5"},"name":"Likely D","orientation":"h","text":["\u003cb\u003eLikely D\u003c\u002fb\u003e\u003cbr\u003e4"],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[4],"y":["seats"],"type":"bar"},{"hovertemplate":"\u003cb\u003eLean D\u003c\u002fb\u003e: 2 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#9dc3e6"},"name":"Lean D","orientation":"h","text":[""],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[2],"y":["seats"],"type":"bar"},{"hovertemplate":"\u003cb\u003eToss-up\u003c\u002fb\u003e: 2 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#d4b896"},"name":"Toss-up","orientation":"h","text":[""],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[2],"y":["seats"],"type":"bar"},{"hovertemplate":"\u003cb\u003eLean R\u003c\u002fb\u003e: 1 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#e8a080"},"name":"Lean R","orientation":"h","text":[""],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[1],"y":["seats"],"type":"bar"},{"hovertemplate":"\u003cb\u003eLikely R\u003c\u002fb\u003e: 4 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#d95f35"},"name":"Likely R","orientation":"h","text":["\u003cb\u003eLikely R\u003c\u002fb\u003e\u003cbr\u003e4"],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[4],"y":["seats"],"type":"bar"},{"hovertemplate":"\u003cb\u003eSafe R\u003c\u002fb\u003e: 15 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#c0392b"},"name":"Safe R","orientation":"h","text":["\u003cb\u003eSafe R\u003c\u002fb\u003e\u003cbr\u003e15"],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[15],"y":["seats"],"type":"bar"},{"hovertemplate":"\u003cb\u003eR Hold\u003c\u002fb\u003e: 31 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#e0b0a8"},"name":"R Hold","orientation":"h","text":["\u003cb\u003eR Hold\u003c\u002fb\u003e\u003cbr\u003e31"],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[31],"y":["seats"],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"shapes":[{"line":{"color":"#333","dash":"dash","width":2},"type":"line","x0":51,"x1":51,"xref":"x","y0":0,"y1":1,"yref":"y domain"}],"annotations":[{"font":{"color":"#333","family":"Georgia, serif","size":11},"showarrow":false,"text":"Majority: 51","x":51,"xanchor":"center","xref":"x","y":1,"yanchor":"bottom","yref":"y domain"},{"font":{"color":"#1a6bb5","family":"Georgia, serif","size":13},"showarrow":false,"text":"\u003cb style='color:#1a6bb5'\u003eD: 47\u003c\u002fb\u003e","x":0,"xanchor":"left","xref":"x","y":1.6,"yref":"y"},{"font":{"color":"#c0392b","family":"Georgia, serif","size":13},"showarrow":false,"text":"\u003cb style='color:#c0392b'\u003eR: 51\u003c\u002fb\u003e","x":100,"xanchor":"right","xref":"x","y":1.6,"yref":"y"},{"font":{"color":"#8a7a60","family":"Georgia, serif","size":11},"showarrow":false,"text":"\u003cspan style='color:#8a7a60'\u003eToss-up: 2\u003c\u002fspan\u003e","x":51,"xanchor":"center","xref":"x","y":1.6,"yref":"y"}],"xaxis":{"range":[0,100],"showticklabels":false,"showgrid":false},"yaxis":{"showticklabels":false,"showgrid":false},"margin":{"l":10,"r":10,"t":30,"b":10},"font":{"family":"Georgia, serif"},"barmode":"stack","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","showlegend":false,"height":80},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+</div>
+<div class="card" style="padding:16px 24px 8px; margin-bottom:16px; cursor:pointer;">
+  <p class="map-hint">Click any contested state to view its race details.</p>
+<div>                            <div id="senate-map" class="plotly-graph-div" style="height:440px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("senate-map")) {                    Plotly.newPlot(                        "senate-map",                        [{"colorscale":[[0.0,"#c0392b"],[0.3,"#e8a080"],[0.42,"#f0c8b8"],[0.5,"#e0ddd8"],[0.58,"#c5daf0"],[0.7,"#9dc3e6"],[1.0,"#1a6bb5"]],"hovertemplate":"%{text}\u003cextra\u003e\u003c\u002fextra\u003e","locationmode":"USA-states","locations":["AZ","CA","CT","HI","IN","MD","MO","NV","NY","ND","PA","UT","VT","WA","WI","DC"],"marker":{"line":{"color":"white","width":0.5}},"showscale":false,"text":["\u003cb\u003eArizona\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Split","\u003cb\u003eCalifornia\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eConnecticut\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eHawaii\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eIndiana\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eMaryland\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eMissouri\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eNevada\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eNew York\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eNorth Dakota\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003ePennsylvania\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Split","\u003cb\u003eUtah\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eVermont\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eWashington\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eWisconsin\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Split","\u003cb\u003eDistrict of Columbia\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Split"],"z":[0.0,20.0,20.0,20.0,-20.0,20.0,-20.0,20.0,20.0,-20.0,0.0,-20.0,20.0,20.0,0.0,0.0],"zmax":25,"zmid":0,"zmin":-25,"type":"choropleth"},{"colorscale":[[0.0,"#c0392b"],[0.3,"#e8a080"],[0.42,"#f0c8b8"],[0.5,"#e0ddd8"],[0.58,"#c5daf0"],[0.7,"#9dc3e6"],[1.0,"#1a6bb5"]],"hovertemplate":"%{text}\u003cextra\u003e\u003c\u002fextra\u003e","locationmode":"USA-states","locations":["WV","WY","KY","AR","OK","AL","ID","TN","SD","NE","LA","MT","KS","MS","SC","IA","FL","TX","OH","AK","MI","NC","NH","GA","ME","MN","NJ","VA","CO","NM","IL","DE","OR","RI","MA"],"marker":{"line":{"color":"white","width":1.2}},"showscale":false,"text":["\u003cb\u003eWest Virginia\u003c\u002fb\u003e\u003cbr\u003eAnderson vs Capito\u003cbr\u003eMargin: R+39.2%\u003cbr\u003eRating: Safe R","\u003cb\u003eWyoming\u003c\u002fb\u003e\u003cbr\u003eGreen vs Barrasso\u003cbr\u003eMargin: R+38.6%\u003cbr\u003eRating: Safe R","\u003cb\u003eKentucky\u003c\u002fb\u003e\u003cbr\u003eBooker vs Cameron\u003cbr\u003eMargin: R+35.7%\u003cbr\u003eRating: Safe R","\u003cb\u003eArkansas\u003c\u002fb\u003e\u003cbr\u003eShoffner vs Cotton\u003cbr\u003eMargin: R+34.7%\u003cbr\u003eRating: Safe R","\u003cb\u003eOklahoma\u003c\u002fb\u003e\u003cbr\u003eCassity vs Hern\u003cbr\u003eMargin: R+33.2%\u003cbr\u003eRating: Safe R","\u003cb\u003eAlabama\u003c\u002fb\u003e\u003cbr\u003eLarriett vs Tuberville\u003cbr\u003eMargin: R+32.0%\u003cbr\u003eRating: Safe R","\u003cb\u003eIdaho\u003c\u002fb\u003e\u003cbr\u003eBond vs Risch\u003cbr\u003eMargin: R+31.7%\u003cbr\u003eRating: Safe R","\u003cb\u003eTennessee\u003c\u002fb\u003e\u003cbr\u003eBradshaw vs Hagerty\u003cbr\u003eMargin: R+28.9%\u003cbr\u003eRating: Safe R","\u003cb\u003eSouth Dakota\u003c\u002fb\u003e\u003cbr\u003eBeaudion vs Rounds\u003cbr\u003eMargin: R+24.0%\u003cbr\u003eRating: Safe R","\u003cb\u003eNebraska\u003c\u002fb\u003e\u003cbr\u003eBurbank vs Ricketts\u003cbr\u003eMargin: R+19.0%\u003cbr\u003eRating: Safe R","\u003cb\u003eLouisiana\u003c\u002fb\u003e\u003cbr\u003eAlbares vs Cassidy\u003cbr\u003eMargin: R+15.0%\u003cbr\u003eRating: Safe R","\u003cb\u003eMontana\u003c\u002fb\u003e\u003cbr\u003eNeill vs Daines\u003cbr\u003eMargin: R+14.0%\u003cbr\u003eRating: Safe R","\u003cb\u003eKansas\u003c\u002fb\u003e\u003cbr\u003eDavis vs Marshall\u003cbr\u003eMargin: R+13.6%\u003cbr\u003eRating: Safe R","\u003cb\u003eMississippi\u003c\u002fb\u003e\u003cbr\u003eColom vs Hyde-Smith\u003cbr\u003eMargin: R+13.6%\u003cbr\u003eRating: Safe R","\u003cb\u003eSouth Carolina\u003c\u002fb\u003e\u003cbr\u003eAndrews vs Graham\u003cbr\u003eMargin: R+12.3%\u003cbr\u003eRating: Safe R","\u003cb\u003eIowa\u003c\u002fb\u003e\u003cbr\u003eTurek vs Hinson\u003cbr\u003eMargin: R+9.7%\u003cbr\u003eRating: Likely R","\u003cb\u003eFlorida\u003c\u002fb\u003e\u003cbr\u003eVindman vs Moody\u003cbr\u003eMargin: R+9.3%\u003cbr\u003eRating: Likely R","\u003cb\u003eTexas\u003c\u002fb\u003e\u003cbr\u003eTalarico vs Cornyn\u003cbr\u003eMargin: R+8.3%\u003cbr\u003eRating: Likely R","\u003cb\u003eOhio\u003c\u002fb\u003e\u003cbr\u003eBrown vs Husted\u003cbr\u003eMargin: R+7.5%\u003cbr\u003eRating: Likely R","\u003cb\u003eAlaska\u003c\u002fb\u003e\u003cbr\u003ePeltola vs Sullivan\u003cbr\u003eMargin: R+5.0%\u003cbr\u003eRating: Lean R","\u003cb\u003eMichigan\u003c\u002fb\u003e\u003cbr\u003eStevens vs Rogers\u003cbr\u003eMargin: D+1.3%\u003cbr\u003eRating: Toss-up","\u003cb\u003eNorth Carolina\u003c\u002fb\u003e\u003cbr\u003eCooper vs Whatley\u003cbr\u003eMargin: D+1.3%\u003cbr\u003eRating: Toss-up","\u003cb\u003eNew Hampshire\u003c\u002fb\u003e\u003cbr\u003ePappas vs Sununu\u003cbr\u003eMargin: D+2.2%\u003cbr\u003eRating: Lean D","\u003cb\u003eGeorgia\u003c\u002fb\u003e\u003cbr\u003eOssoff vs Carter\u003cbr\u003eMargin: D+2.3%\u003cbr\u003eRating: Lean D","\u003cb\u003eMaine\u003c\u002fb\u003e\u003cbr\u003eMills vs Collins\u003cbr\u003eMargin: D+5.7%\u003cbr\u003eRating: Likely D","\u003cb\u003eMinnesota\u003c\u002fb\u003e\u003cbr\u003eCraig vs White\u003cbr\u003eMargin: D+7.1%\u003cbr\u003eRating: Likely D","\u003cb\u003eNew Jersey\u003c\u002fb\u003e\u003cbr\u003eBooker vs Kean\u003cbr\u003eMargin: D+7.4%\u003cbr\u003eRating: Likely D","\u003cb\u003eVirginia\u003c\u002fb\u003e\u003cbr\u003eWarner vs Youngkin\u003cbr\u003eMargin: D+8.4%\u003cbr\u003eRating: Likely D","\u003cb\u003eColorado\u003c\u002fb\u003e\u003cbr\u003eHickenlooper vs O'Dea\u003cbr\u003eMargin: D+10.2%\u003cbr\u003eRating: Safe D","\u003cb\u003eNew Mexico\u003c\u002fb\u003e\u003cbr\u003eLujan vs Barela\u003cbr\u003eMargin: D+11.9%\u003cbr\u003eRating: Safe D","\u003cb\u003eIllinois\u003c\u002fb\u003e\u003cbr\u003eStratton vs Tracy\u003cbr\u003eMargin: D+14.2%\u003cbr\u003eRating: Safe D","\u003cb\u003eDelaware\u003c\u002fb\u003e\u003cbr\u003eCoons vs Katz\u003cbr\u003eMargin: D+14.2%\u003cbr\u003eRating: Safe D","\u003cb\u003eOregon\u003c\u002fb\u003e\u003cbr\u003eMerkley vs Perkins\u003cbr\u003eMargin: D+14.6%\u003cbr\u003eRating: Safe D","\u003cb\u003eRhode Island\u003c\u002fb\u003e\u003cbr\u003eReed vs McKay\u003cbr\u003eMargin: D+20.3%\u003cbr\u003eRating: Safe D","\u003cb\u003eMassachusetts\u003c\u002fb\u003e\u003cbr\u003eMarkey vs Deaton\u003cbr\u003eMargin: D+34.9%\u003cbr\u003eRating: Safe D"],"z":[-39.15821083616415,-38.64575974454735,-35.67901888080041,-34.744006366296986,-33.23378890760145,-31.959491721270304,-31.714343983719708,-28.91889803161444,-24.011612830839965,-19.02198360991067,-14.985575188787813,-14.001819295362315,-13.638999136523168,-13.63102085310193,-12.32092084958756,-9.656451279649607,-9.313649433504397,-8.256431386833647,-7.476056990775639,-4.966783889604699,1.2842470254685736,1.297484519407,2.231563841919119,2.326838201871809,5.710880135621686,7.056180885084451,7.431391472350114,8.384637701947035,10.195458010858369,11.893070556641987,14.157214022683036,14.199835622244038,14.553620262463768,20.290753049134608,34.86472632348036],"zmax":25,"zmid":0,"zmin":-25,"type":"choropleth"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"geo":{"projection":{"type":"albers usa"},"scope":"usa","showlakes":false,"bgcolor":"rgba(0,0,0,0)","landcolor":"#f5f2ec","coastlinecolor":"#ccc"},"margin":{"l":0,"r":0,"t":0,"b":0},"font":{"family":"Georgia, serif","color":"#1a1a2e"},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","height":440},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+</div>
+<div class="legend-row"><div class="legend-item"><div class="legend-dot" style="background:#1a6bb5;"></div>Safe D</div><div class="legend-item"><div class="legend-dot" style="background:#5b9bd5;"></div>Likely D</div><div class="legend-item"><div class="legend-dot" style="background:#9dc3e6;"></div>Lean D</div><div class="legend-item"><div class="legend-dot" style="background:#d4b896;"></div>Toss-up</div><div class="legend-item"><div class="legend-dot" style="background:#e8a080;"></div>Lean R</div><div class="legend-item"><div class="legend-dot" style="background:#d95f35;"></div>Likely R</div><div class="legend-item"><div class="legend-dot" style="background:#c0392b;"></div>Safe R</div></div>
+
+<div style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; background:white;
+              border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+  <thead>
+    <tr>
+      <th style="padding:8px 12px; text-align:left; font-family:'Playfair Display', Georgia, serif; font-size:0.8rem; color:#666; font-weight:700; border-bottom:2px solid #ddd; white-space:nowrap;">State</th>
+      <th style="padding:8px 12px; text-align:left; font-family:'Playfair Display', Georgia, serif; font-size:0.8rem; color:#666; font-weight:700; border-bottom:2px solid #ddd; white-space:nowrap;" style="color:#1a6bb5;">Dem Candidate</th>
+      <th style="padding:8px 12px; text-align:left; font-family:'Playfair Display', Georgia, serif; font-size:0.8rem; color:#666; font-weight:700; border-bottom:2px solid #ddd; white-space:nowrap;" style="color:#c0392b;">Rep Candidate</th>
+      <th style="padding:8px 12px; text-align:left; font-family:'Playfair Display', Georgia, serif; font-size:0.8rem; color:#666; font-weight:700; border-bottom:2px solid #ddd; white-space:nowrap;" style="text-align:center;">Margin</th>
+      <th style="padding:8px 12px; text-align:left; font-family:'Playfair Display', Georgia, serif; font-size:0.8rem; color:#666; font-weight:700; border-bottom:2px solid #ddd; white-space:nowrap;" style="text-align:center;">Rating</th>
+      <th style="padding:8px 12px; text-align:left; font-family:'Playfair Display', Georgia, serif; font-size:0.8rem; color:#666; font-weight:700; border-bottom:2px solid #ddd; white-space:nowrap;" style="text-align:center;">Polling</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/anderson_vs_capito_2026.html" style="color:#1a1a2e; text-decoration:none;">West Virginia</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Rachel Anderson</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Shelley Moore Capito</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+39.2</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/green_vs_barrasso_2026.html" style="color:#1a1a2e; text-decoration:none;">Wyoming</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Eric Green</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    John Barrasso</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+38.6</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/booker_vs_cameron_2026.html" style="color:#1a1a2e; text-decoration:none;">Kentucky</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Charles Booker</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Daniel Cameron</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+35.7</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/shoffner_vs_cotton_2026.html" style="color:#1a1a2e; text-decoration:none;">Arkansas</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Hallie Shoffner</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Tom Cotton</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+34.7</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/cassity_vs_hern_2026.html" style="color:#1a1a2e; text-decoration:none;">Oklahoma</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Zach Cassity</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Kevin Hern</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+33.2</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/larriett_vs_tuberville_2026.html" style="color:#1a1a2e; text-decoration:none;">Alabama</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Dakarai Larriett</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Tommy Tuberville</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+32.0</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/bond_vs_risch_2026.html" style="color:#1a1a2e; text-decoration:none;">Idaho</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Nickolas Bond</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Jim Risch</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+31.7</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/bradshaw_vs_hagerty_2026.html" style="color:#1a1a2e; text-decoration:none;">Tennessee</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Marquita Bradshaw</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Bill Hagerty</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+28.9</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/beaudion_vs_rounds_2026.html" style="color:#1a1a2e; text-decoration:none;">South Dakota</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Julian Beaudion</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Mike Rounds</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+24.0</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/burbank_vs_ricketts_2026.html" style="color:#1a1a2e; text-decoration:none;">Nebraska</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Cindy Burbank</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Pete Ricketts</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+19.0</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/albares_vs_cassidy_2026.html" style="color:#1a1a2e; text-decoration:none;">Louisiana</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Nick Albares</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Bill Cassidy</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+15.0</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/neill_vs_daines_2026.html" style="color:#1a1a2e; text-decoration:none;">Montana</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Reilly Neill</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Steve Daines</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+14.0</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/davis_vs_marshall_2026.html" style="color:#1a1a2e; text-decoration:none;">Kansas</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Christy Davis</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Roger Marshall</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+13.6</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/colom_vs_hyde_smith_2026.html" style="color:#1a1a2e; text-decoration:none;">Mississippi</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Scott Colom</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Cindy Hyde-Smith</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+13.6</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/andrews_vs_graham_2026.html" style="color:#1a1a2e; text-decoration:none;">South Carolina</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Annie Andrews</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Lindsey Graham</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+12.3</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/turek_vs_hinson_2026.html" style="color:#1a1a2e; text-decoration:none;">Iowa</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Josh Turek</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Ashley Hinson</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+9.7</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d95f35; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Likely R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/vindman_vs_moody_2026.html" style="color:#1a1a2e; text-decoration:none;">Florida</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Alexander Vindman</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Ashley Moody</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+9.3</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d95f35; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Likely R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/talarico_vs_cornyn_2026.html" style="color:#1a1a2e; text-decoration:none;">Texas</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    James Talarico</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    John Cornyn</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+8.3</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d95f35; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Likely R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/brown_vs_husted_2026.html" style="color:#1a1a2e; text-decoration:none;">Ohio</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Sherrod Brown</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Jon Husted</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+7.5</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d95f35; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Likely R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/peltola_vs_sullivan_2026.html" style="color:#1a1a2e; text-decoration:none;">Alaska</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Mary Peltola</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Dan Sullivan</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+5.0</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#e8a080; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Lean R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fffef0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/stevens_vs_rogers_2026.html" style="color:#1a1a2e; text-decoration:none;">Michigan</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Haley Stevens</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Mike Rogers</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+1.3</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d4b896; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Toss-up</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fffef0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/cooper_vs_whatley_2026.html" style="color:#1a1a2e; text-decoration:none;">North Carolina</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Roy Cooper</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Michael Whatley</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+1.3</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d4b896; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Toss-up</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/pappas_vs_sununu_2026.html" style="color:#1a1a2e; text-decoration:none;">New Hampshire</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Chris Pappas</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    John Sununu</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+2.2</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#9dc3e6; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Lean D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/ossoff_vs_carter_2026.html" style="color:#1a1a2e; text-decoration:none;">Georgia</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Jon Ossoff</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Buddy Carter</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+2.3</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#9dc3e6; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Lean D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/mills_vs_collins_2026.html" style="color:#1a1a2e; text-decoration:none;">Maine</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Janet Mills</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Susan Collins</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+5.7</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#5b9bd5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Likely D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/craig_vs_white_2026.html" style="color:#1a1a2e; text-decoration:none;">Minnesota</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Angie Craig</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Royce White</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+7.1</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#5b9bd5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Likely D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/booker_vs_kean_2026.html" style="color:#1a1a2e; text-decoration:none;">New Jersey</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Cory Booker</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Tom Kean</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+7.4</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#5b9bd5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Likely D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/warner_vs_youngkin_2026.html" style="color:#1a1a2e; text-decoration:none;">Virginia</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Mark Warner</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Glenn Youngkin</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+8.4</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#5b9bd5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Likely D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/hickenlooper_vs_o_dea_2026.html" style="color:#1a1a2e; text-decoration:none;">Colorado</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    John Hickenlooper</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Joe O'Dea</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+10.2</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/lujan_vs_barela_2026.html" style="color:#1a1a2e; text-decoration:none;">New Mexico</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Ben Ray Lujan</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Manny Barela</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+11.9</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/stratton_vs_tracy_2026.html" style="color:#1a1a2e; text-decoration:none;">Illinois</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Juliana Stratton</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Don Tracy</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+14.2</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/coons_vs_katz_2026.html" style="color:#1a1a2e; text-decoration:none;">Delaware</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Chris Coons</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Michael Katz</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+14.2</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/merkley_vs_perkins_2026.html" style="color:#1a1a2e; text-decoration:none;">Oregon</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Jeff Merkley</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Jo Rae Perkins</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+14.6</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/reed_vs_mckay_2026.html" style="color:#1a1a2e; text-decoration:none;">Rhode Island</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Jack Reed</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Raymond McKay</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+20.3</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/markey_vs_deaton_2026.html" style="color:#1a1a2e; text-decoration:none;">Massachusetts</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Ed Markey</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    John Deaton</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+34.9</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+<div id="tab-governor" style="display:none;">
+<div class="card" style="padding:16px 24px 8px; margin-bottom:16px;">
+  <p style="font-family:'Playfair Display', Georgia, serif; font-size:0.85rem; font-weight:700;      color:#1a1a2e; margin:0 0 4px 0;">Governor Seat Control</p>
+<div>                            <div id="gov-bar" class="plotly-graph-div" style="height:80px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("gov-bar")) {                    Plotly.newPlot(                        "gov-bar",                        [{"hovertemplate":"\u003cb\u003eD Hold\u003c\u002fb\u003e: 5 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#b0c8e8"},"name":"D Hold","orientation":"h","text":["\u003cb\u003eD Hold\u003c\u002fb\u003e\u003cbr\u003e5"],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[5.0],"y":["seats"],"type":"bar"},{"hovertemplate":"\u003cb\u003eSafe D\u003c\u002fb\u003e: 11 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#1a6bb5"},"name":"Safe D","orientation":"h","text":["\u003cb\u003eSafe D\u003c\u002fb\u003e\u003cbr\u003e11"],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[11],"y":["seats"],"type":"bar"},{"hovertemplate":"\u003cb\u003eLikely D\u003c\u002fb\u003e: 2 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#5b9bd5"},"name":"Likely D","orientation":"h","text":[""],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[2],"y":["seats"],"type":"bar"},{"hovertemplate":"\u003cb\u003eLean D\u003c\u002fb\u003e: 1 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#9dc3e6"},"name":"Lean D","orientation":"h","text":[""],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[1],"y":["seats"],"type":"bar"},{"hovertemplate":"\u003cb\u003eToss-up\u003c\u002fb\u003e: 6 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#d4b896"},"name":"Toss-up","orientation":"h","text":["\u003cb\u003eToss-up\u003c\u002fb\u003e\u003cbr\u003e6"],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[6],"y":["seats"],"type":"bar"},{"hovertemplate":"\u003cb\u003eLikely R\u003c\u002fb\u003e: 4 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#d95f35"},"name":"Likely R","orientation":"h","text":["\u003cb\u003eLikely R\u003c\u002fb\u003e\u003cbr\u003e4"],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[4],"y":["seats"],"type":"bar"},{"hovertemplate":"\u003cb\u003eSafe R\u003c\u002fb\u003e: 11 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#c0392b"},"name":"Safe R","orientation":"h","text":["\u003cb\u003eSafe R\u003c\u002fb\u003e\u003cbr\u003e11"],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[11],"y":["seats"],"type":"bar"},{"hovertemplate":"\u003cb\u003eR Hold\u003c\u002fb\u003e: 10 seats\u003cextra\u003e\u003c\u002fextra\u003e","marker":{"color":"#e0b0a8"},"name":"R Hold","orientation":"h","text":["\u003cb\u003eR Hold\u003c\u002fb\u003e\u003cbr\u003e10"],"textfont":{"color":"white","family":"Georgia, serif","size":10},"textposition":"inside","width":0.7,"x":[10.0],"y":["seats"],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"shapes":[{"line":{"color":"#333","dash":"dash","width":2},"type":"line","x0":26,"x1":26,"xref":"x","y0":0,"y1":1,"yref":"y domain"}],"annotations":[{"font":{"color":"#333","family":"Georgia, serif","size":11},"showarrow":false,"text":"Majority: 26","x":26,"xanchor":"center","xref":"x","y":1,"yanchor":"bottom","yref":"y domain"},{"font":{"color":"#1a6bb5","family":"Georgia, serif","size":13},"showarrow":false,"text":"\u003cb style='color:#1a6bb5'\u003eD: 19\u003c\u002fb\u003e","x":0,"xanchor":"left","xref":"x","y":1.6,"yref":"y"},{"font":{"color":"#c0392b","family":"Georgia, serif","size":13},"showarrow":false,"text":"\u003cb style='color:#c0392b'\u003eR: 25\u003c\u002fb\u003e","x":50,"xanchor":"right","xref":"x","y":1.6,"yref":"y"},{"font":{"color":"#8a7a60","family":"Georgia, serif","size":11},"showarrow":false,"text":"\u003cspan style='color:#8a7a60'\u003eToss-up: 6\u003c\u002fspan\u003e","x":26,"xanchor":"center","xref":"x","y":1.6,"yref":"y"}],"xaxis":{"range":[0,50],"showticklabels":false,"showgrid":false},"yaxis":{"showticklabels":false,"showgrid":false},"margin":{"l":10,"r":10,"t":30,"b":10},"font":{"family":"Georgia, serif"},"barmode":"stack","paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","showlegend":false,"height":80},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+</div>
+<div class="card" style="padding:16px 24px 8px; margin-bottom:16px; cursor:pointer;">
+  <p class="map-hint">Click any contested state to view its race details.</p>
+<div>                            <div id="gov-map" class="plotly-graph-div" style="height:440px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("gov-map")) {                    Plotly.newPlot(                        "gov-map",                        [{"colorscale":[[0.0,"#c0392b"],[0.3,"#e8a080"],[0.42,"#f0c8b8"],[0.5,"#e0ddd8"],[0.58,"#c5daf0"],[0.7,"#9dc3e6"],[1.0,"#1a6bb5"]],"hovertemplate":"%{text}\u003cextra\u003e\u003c\u002fextra\u003e","locationmode":"USA-states","locations":["DE","HI","IN","KY","LA","MS","MO","MT","NJ","NC","ND","UT","VA","WA","WV","DC"],"marker":{"line":{"color":"white","width":0.5}},"showscale":false,"text":["\u003cb\u003eDelaware\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eHawaii\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eIndiana\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eKentucky\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eLouisiana\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eMississippi\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eMissouri\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eMontana\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eNew Jersey\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eNorth Carolina\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eNorth Dakota\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eUtah\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eVirginia\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eWashington\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eWest Virginia\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eDistrict of Columbia\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Split"],"z":[20.0,20.0,-20.0,20.0,-20.0,-20.0,-20.0,-20.0,-20.0,20.0,-20.0,-20.0,-20.0,20.0,-20.0,0.0],"zmax":25,"zmid":0,"zmin":-25,"type":"choropleth"},{"colorscale":[[0.0,"#c0392b"],[0.3,"#e8a080"],[0.42,"#f0c8b8"],[0.5,"#e0ddd8"],[0.58,"#c5daf0"],[0.7,"#9dc3e6"],[1.0,"#1a6bb5"]],"hovertemplate":"%{text}\u003cextra\u003e\u003c\u002fextra\u003e","locationmode":"USA-states","locations":["WY","AR","OK","ID","TN","AL","SD","NE","KS","SC","TX","FL","OH","AK","IA","NH","GA","AZ","NV","WI","MI","PA","MN","ME","CO","NM","OR","IL","NY","CT","RI","CA","VT","MD","MA"],"marker":{"line":{"color":"white","width":1.2}},"showscale":false,"text":["\u003cb\u003eWyoming\u003c\u002fb\u003e\u003cbr\u003eGreen vs Degenfelder\u003cbr\u003eMargin: R+39.9%\u003cbr\u003eRating: Safe R","\u003cb\u003eArkansas\u003c\u002fb\u003e\u003cbr\u003eLove vs Sanders\u003cbr\u003eMargin: R+33.9%\u003cbr\u003eRating: Safe R","\u003cb\u003eOklahoma\u003c\u002fb\u003e\u003cbr\u003eMunson vs Drummond\u003cbr\u003eMargin: R+33.2%\u003cbr\u003eRating: Safe R","\u003cb\u003eIdaho\u003c\u002fb\u003e\u003cbr\u003eKirkham vs Little\u003cbr\u003eMargin: R+32.1%\u003cbr\u003eRating: Safe R","\u003cb\u003eTennessee\u003c\u002fb\u003e\u003cbr\u003eMcCants vs Blackburn\u003cbr\u003eMargin: R+30.4%\u003cbr\u003eRating: Safe R","\u003cb\u003eAlabama\u003c\u002fb\u003e\u003cbr\u003eJones vs Marshall\u003cbr\u003eMargin: R+29.1%\u003cbr\u003eRating: Safe R","\u003cb\u003eSouth Dakota\u003c\u002fb\u003e\u003cbr\u003eAhlers vs Rhoden\u003cbr\u003eMargin: R+23.9%\u003cbr\u003eRating: Safe R","\u003cb\u003eNebraska\u003c\u002fb\u003e\u003cbr\u003eWalz vs Pillen\u003cbr\u003eMargin: R+18.1%\u003cbr\u003eRating: Safe R","\u003cb\u003eKansas\u003c\u002fb\u003e\u003cbr\u003eHolscher vs Colyer\u003cbr\u003eMargin: R+13.7%\u003cbr\u003eRating: Safe R","\u003cb\u003eSouth Carolina\u003c\u002fb\u003e\u003cbr\u003eMcLeod vs Evette\u003cbr\u003eMargin: R+12.6%\u003cbr\u003eRating: Safe R","\u003cb\u003eTexas\u003c\u002fb\u003e\u003cbr\u003eHinojosa vs Abbott\u003cbr\u003eMargin: R+11.1%\u003cbr\u003eRating: Safe R","\u003cb\u003eFlorida\u003c\u002fb\u003e\u003cbr\u003eJolly vs Donalds\u003cbr\u003eMargin: R+8.2%\u003cbr\u003eRating: Likely R","\u003cb\u003eOhio\u003c\u002fb\u003e\u003cbr\u003eActon vs Ramaswamy\u003cbr\u003eMargin: R+7.8%\u003cbr\u003eRating: Likely R","\u003cb\u003eAlaska\u003c\u002fb\u003e\u003cbr\u003eBegich vs Bishop\u003cbr\u003eMargin: R+7.3%\u003cbr\u003eRating: Likely R","\u003cb\u003eIowa\u003c\u002fb\u003e\u003cbr\u003eSand vs Feenstra\u003cbr\u003eMargin: R+6.7%\u003cbr\u003eRating: Likely R","\u003cb\u003eNew Hampshire\u003c\u002fb\u003e\u003cbr\u003eKiper vs Ayotte\u003cbr\u003eMargin: R+1.2%\u003cbr\u003eRating: Toss-up","\u003cb\u003eGeorgia\u003c\u002fb\u003e\u003cbr\u003eBottoms vs Carr\u003cbr\u003eMargin: R+1.1%\u003cbr\u003eRating: Toss-up","\u003cb\u003eArizona\u003c\u002fb\u003e\u003cbr\u003eHobbs vs Biggs\u003cbr\u003eMargin: R+1.1%\u003cbr\u003eRating: Toss-up","\u003cb\u003eNevada\u003c\u002fb\u003e\u003cbr\u003eFord vs Lombardo\u003cbr\u003eMargin: R+0.9%\u003cbr\u003eRating: Toss-up","\u003cb\u003eWisconsin\u003c\u002fb\u003e\u003cbr\u003eBarnes vs Tiffany\u003cbr\u003eMargin: R+0.4%\u003cbr\u003eRating: Toss-up","\u003cb\u003eMichigan\u003c\u002fb\u003e\u003cbr\u003eBenson vs James\u003cbr\u003eMargin: D+0.8%\u003cbr\u003eRating: Toss-up","\u003cb\u003ePennsylvania\u003c\u002fb\u003e\u003cbr\u003eShapiro vs Garrity\u003cbr\u003eMargin: D+3.1%\u003cbr\u003eRating: Lean D","\u003cb\u003eMinnesota\u003c\u002fb\u003e\u003cbr\u003eFlanagan vs Demuth\u003cbr\u003eMargin: D+7.0%\u003cbr\u003eRating: Likely D","\u003cb\u003eMaine\u003c\u002fb\u003e\u003cbr\u003eBellows vs Mason\u003cbr\u003eMargin: D+8.3%\u003cbr\u003eRating: Likely D","\u003cb\u003eColorado\u003c\u002fb\u003e\u003cbr\u003ePolis vs Bottoms\u003cbr\u003eMargin: D+10.8%\u003cbr\u003eRating: Safe D","\u003cb\u003eNew Mexico\u003c\u002fb\u003e\u003cbr\u003eHaaland vs Rodriguez\u003cbr\u003eMargin: D+12.1%\u003cbr\u003eRating: Safe D","\u003cb\u003eOregon\u003c\u002fb\u003e\u003cbr\u003eKotek vs Drazan\u003cbr\u003eMargin: D+14.8%\u003cbr\u003eRating: Safe D","\u003cb\u003eIllinois\u003c\u002fb\u003e\u003cbr\u003ePritzker vs Bailey\u003cbr\u003eMargin: D+15.1%\u003cbr\u003eRating: Safe D","\u003cb\u003eNew York\u003c\u002fb\u003e\u003cbr\u003eHochul vs Blakeman\u003cbr\u003eMargin: D+15.3%\u003cbr\u003eRating: Safe D","\u003cb\u003eConnecticut\u003c\u002fb\u003e\u003cbr\u003eLamont vs Fazio\u003cbr\u003eMargin: D+16.1%\u003cbr\u003eRating: Safe D","\u003cb\u003eRhode Island\u003c\u002fb\u003e\u003cbr\u003eFoulkes vs Pelino\u003cbr\u003eMargin: D+20.4%\u003cbr\u003eRating: Safe D","\u003cb\u003eCalifornia\u003c\u002fb\u003e\u003cbr\u003eNewsom vs Bianco\u003cbr\u003eMargin: D+33.0%\u003cbr\u003eRating: Safe D","\u003cb\u003eVermont\u003c\u002fb\u003e\u003cbr\u003eJanoo vs Scott\u003cbr\u003eMargin: D+33.6%\u003cbr\u003eRating: Safe D","\u003cb\u003eMaryland\u003c\u002fb\u003e\u003cbr\u003eMoore vs Cox\u003cbr\u003eMargin: D+35.2%\u003cbr\u003eRating: Safe D","\u003cb\u003eMassachusetts\u003c\u002fb\u003e\u003cbr\u003eHealey vs Kennealy\u003cbr\u003eMargin: D+35.2%\u003cbr\u003eRating: Safe D"],"z":[-39.88360023940268,-33.91141487985078,-33.181388716684296,-32.06503019556923,-30.418580503635688,-29.121069862595697,-23.934177207576084,-18.075874629030864,-13.740314043984988,-12.632023748353568,-11.090381885282213,-8.161677742336458,-7.760422832255053,-7.290830949366651,-6.6563395165021575,-1.1668749172174628,-1.113207335275476,-1.0868905388826349,-0.9145141681903723,-0.3689580075281213,0.7836035337880958,3.0606439014737603,7.007903007437243,8.329647785257734,10.808355582930972,12.143383757157196,14.782377693341566,15.108541997849528,15.269666088597646,16.103030477696336,20.395048556987103,33.00017882020878,33.6123575218438,35.16606446926812,35.1722843122415],"zmax":25,"zmid":0,"zmin":-25,"type":"choropleth"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"geo":{"projection":{"type":"albers usa"},"scope":"usa","showlakes":false,"bgcolor":"rgba(0,0,0,0)","landcolor":"#f5f2ec","coastlinecolor":"#ccc"},"margin":{"l":0,"r":0,"t":0,"b":0},"font":{"family":"Georgia, serif","color":"#1a1a2e"},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","height":440},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+</div>
+<div class="legend-row"><div class="legend-item"><div class="legend-dot" style="background:#1a6bb5;"></div>Safe D</div><div class="legend-item"><div class="legend-dot" style="background:#5b9bd5;"></div>Likely D</div><div class="legend-item"><div class="legend-dot" style="background:#9dc3e6;"></div>Lean D</div><div class="legend-item"><div class="legend-dot" style="background:#d4b896;"></div>Toss-up</div><div class="legend-item"><div class="legend-dot" style="background:#e8a080;"></div>Lean R</div><div class="legend-item"><div class="legend-dot" style="background:#d95f35;"></div>Likely R</div><div class="legend-item"><div class="legend-dot" style="background:#c0392b;"></div>Safe R</div></div>
+
+<div style="overflow-x:auto;">
+<table style="width:100%; border-collapse:collapse; background:white;
+              border-radius:8px; overflow:hidden; box-shadow:0 1px 4px rgba(0,0,0,0.08);">
+  <thead>
+    <tr>
+      <th style="padding:8px 12px; text-align:left; font-family:'Playfair Display', Georgia, serif; font-size:0.8rem; color:#666; font-weight:700; border-bottom:2px solid #ddd; white-space:nowrap;">State</th>
+      <th style="padding:8px 12px; text-align:left; font-family:'Playfair Display', Georgia, serif; font-size:0.8rem; color:#666; font-weight:700; border-bottom:2px solid #ddd; white-space:nowrap;" style="color:#1a6bb5;">Dem Candidate</th>
+      <th style="padding:8px 12px; text-align:left; font-family:'Playfair Display', Georgia, serif; font-size:0.8rem; color:#666; font-weight:700; border-bottom:2px solid #ddd; white-space:nowrap;" style="color:#c0392b;">Rep Candidate</th>
+      <th style="padding:8px 12px; text-align:left; font-family:'Playfair Display', Georgia, serif; font-size:0.8rem; color:#666; font-weight:700; border-bottom:2px solid #ddd; white-space:nowrap;" style="text-align:center;">Margin</th>
+      <th style="padding:8px 12px; text-align:left; font-family:'Playfair Display', Georgia, serif; font-size:0.8rem; color:#666; font-weight:700; border-bottom:2px solid #ddd; white-space:nowrap;" style="text-align:center;">Rating</th>
+      <th style="padding:8px 12px; text-align:left; font-family:'Playfair Display', Georgia, serif; font-size:0.8rem; color:#666; font-weight:700; border-bottom:2px solid #ddd; white-space:nowrap;" style="text-align:center;">Polling</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/green_vs_degenfelder_2026.html" style="color:#1a1a2e; text-decoration:none;">Wyoming</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Gabriel Green</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Megan Degenfelder</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+39.9</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/love_vs_sanders_2026.html" style="color:#1a1a2e; text-decoration:none;">Arkansas</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Fredrick Love</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Sarah Huckabee Sanders</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+33.9</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/munson_vs_drummond_2026.html" style="color:#1a1a2e; text-decoration:none;">Oklahoma</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Cyndi Munson</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Gentner Drummond</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+33.2</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/kirkham_vs_little_2026.html" style="color:#1a1a2e; text-decoration:none;">Idaho</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Jill Kirkham</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Brad Little</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+32.1</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/mccants_vs_blackburn_2026.html" style="color:#1a1a2e; text-decoration:none;">Tennessee</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Kevin McCants</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Marsha Blackburn</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+30.4</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/jones_vs_marshall_2026.html" style="color:#1a1a2e; text-decoration:none;">Alabama</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Doug Jones</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Steve Marshall</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+29.1</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/ahlers_vs_rhoden_2026.html" style="color:#1a1a2e; text-decoration:none;">South Dakota</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Dan Ahlers</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Larry Rhoden</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+23.9</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/walz_vs_pillen_2026.html" style="color:#1a1a2e; text-decoration:none;">Nebraska</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Lynne Walz</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Jim Pillen</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+18.1</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/holscher_vs_colyer_2026.html" style="color:#1a1a2e; text-decoration:none;">Kansas</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Cindy Holscher</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Jeff Colyer</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+13.7</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/mcleod_vs_evette_2026.html" style="color:#1a1a2e; text-decoration:none;">South Carolina</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Mullins McLeod</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Pamela Evette</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+12.6</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/hinojosa_vs_abbott_2026.html" style="color:#1a1a2e; text-decoration:none;">Texas</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Gina Hinojosa</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Greg Abbott</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+11.1</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#c0392b; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/jolly_vs_donalds_2026.html" style="color:#1a1a2e; text-decoration:none;">Florida</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    David Jolly</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Byron Donalds</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+8.2</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d95f35; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Likely R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/acton_vs_ramaswamy_2026.html" style="color:#1a1a2e; text-decoration:none;">Ohio</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Amy Acton</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Vivek Ramaswamy</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+7.8</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d95f35; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Likely R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/begich_vs_bishop_2026.html" style="color:#1a1a2e; text-decoration:none;">Alaska</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Tom Begich</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Click Bishop</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+7.3</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d95f35; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Likely R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fff2f0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/sand_vs_feenstra_2026.html" style="color:#1a1a2e; text-decoration:none;">Iowa</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Rob Sand</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Randy Feenstra</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+6.7</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d95f35; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Likely R</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fffef0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/kiper_vs_ayotte_2026.html" style="color:#1a1a2e; text-decoration:none;">New Hampshire</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Jon Kiper</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Kelly Ayotte</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+1.2</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d4b896; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Toss-up</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fffef0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/bottoms_vs_carr_2026.html" style="color:#1a1a2e; text-decoration:none;">Georgia</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Keisha Lance Bottoms</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Chris Carr</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+1.1</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d4b896; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Toss-up</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#fffef0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/hobbs_vs_biggs_2026.html" style="color:#1a1a2e; text-decoration:none;">Arizona</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Katie Hobbs</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Andy Biggs</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+1.1</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d4b896; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Toss-up</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fffef0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/ford_vs_lombardo_2026.html" style="color:#1a1a2e; text-decoration:none;">Nevada</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Aaron Ford</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Joe Lombardo</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+0.9</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d4b896; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Toss-up</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fffef0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/barnes_vs_tiffany_2026.html" style="color:#1a1a2e; text-decoration:none;">Wisconsin</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Mandela Barnes</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Tom Tiffany</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#c0392b; font-weight:700; text-align:center;">R+0.4</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d4b896; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Toss-up</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#fffef0; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/benson_vs_james_2026.html" style="color:#1a1a2e; text-decoration:none;">Michigan</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Jocelyn Benson</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    John James</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+0.8</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#d4b896; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Toss-up</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/shapiro_vs_garrity_2026.html" style="color:#1a1a2e; text-decoration:none;">Pennsylvania</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Josh Shapiro</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Stacy Garrity</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+3.1</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#9dc3e6; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Lean D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/flanagan_vs_demuth_2026.html" style="color:#1a1a2e; text-decoration:none;">Minnesota</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Peggy Flanagan</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Lisa Demuth</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+7.0</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#5b9bd5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Likely D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/bellows_vs_mason_2026.html" style="color:#1a1a2e; text-decoration:none;">Maine</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Shenna Bellows</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Garrett Mason</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+8.3</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#5b9bd5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Likely D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/polis_vs_bottoms_2026.html" style="color:#1a1a2e; text-decoration:none;">Colorado</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Jared Polis</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Scott Bottoms</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+10.8</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/haaland_vs_rodriguez_2026.html" style="color:#1a1a2e; text-decoration:none;">New Mexico</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Deb Haaland</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Duke Rodriguez</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+12.1</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/kotek_vs_drazan_2026.html" style="color:#1a1a2e; text-decoration:none;">Oregon</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Tina Kotek</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Christine Drazan</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+14.8</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/pritzker_vs_bailey_2026.html" style="color:#1a1a2e; text-decoration:none;">Illinois</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    JB Pritzker</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Darren Bailey</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+15.1</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/hochul_vs_blakeman_2026.html" style="color:#1a1a2e; text-decoration:none;">New York</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Kathy Hochul</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Bruce Blakeman</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+15.3</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/lamont_vs_fazio_2026.html" style="color:#1a1a2e; text-decoration:none;">Connecticut</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Ned Lamont</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Ryan Fazio</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+16.1</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/foulkes_vs_pelino_2026.html" style="color:#1a1a2e; text-decoration:none;">Rhode Island</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Helena Foulkes</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Elaine Pelino</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+20.4</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/newsom_vs_bianco_2026.html" style="color:#1a1a2e; text-decoration:none;">California</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Gavin Newsom</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Chad Bianco</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+33.0</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/janoo_vs_scott_2026.html" style="color:#1a1a2e; text-decoration:none;">Vermont</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Amanda Janoo</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Phil Scott</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+33.6</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/moore_vs_cox_2026.html" style="color:#1a1a2e; text-decoration:none;">Maryland</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Wes Moore</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Dan Cox</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+35.2</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">—</td>
+</tr>
+<tr style="background-color:#f0f7ff; border-bottom:1px solid #eee;">
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a1a2e;
+             font-weight:600;">
+    <a href="races/healey_vs_kennealy_2026.html" style="color:#1a1a2e; text-decoration:none;">Massachusetts</a>
+  </td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#1a6bb5;">
+    Maura Healey</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem; color:#c0392b;">
+    Mike Kennealy</td>
+  <td style="padding:10px 12px; font-family:Georgia, serif; font-size:0.9rem;
+             color:#1a6bb5; font-weight:700; text-align:center;">D+35.2</td>
+  <td style="padding:10px 12px; text-align:center;">
+    <span style="background-color:#1a6bb5; color:white; padding:2px 8px;
+                 border-radius:10px; font-size:0.75rem; font-family:Georgia, serif;
+                 font-weight:600; white-space:nowrap;">Safe D</span>
+  </td>
+  <td style="padding:10px 12px; text-align:center; font-family:Georgia, serif;
+             color:#666; font-size:0.85rem;">✓</td>
+</tr></tbody>
+</table>
+</div>
+</div>
+  <p class="last-updated">Last updated: May 14, 2026 at 10:42 AM</p>
+</div>
+<script>
+function switchTab(name) {
+  document.querySelectorAll('.tab-panel-outer').forEach(function(p) {
+    p.style.display = 'none';
+  });
+  // Use IDs directly since panels aren't class-tagged — toggle by id prefix
+  ['senate', 'governor'].forEach(function(t) {
+    var el = document.getElementById('tab-' + t);
+    if (el) el.style.display = (t === name) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab-btn').forEach(function(b) {
+    b.classList.toggle('active', b.getAttribute('data-tab') === name);
+  });
+}
+
+var _senateUrls = {"WV": "races/anderson_vs_capito_2026.html", "WY": "races/green_vs_barrasso_2026.html", "KY": "races/booker_vs_cameron_2026.html", "AR": "races/shoffner_vs_cotton_2026.html", "OK": "races/cassity_vs_hern_2026.html", "AL": "races/larriett_vs_tuberville_2026.html", "ID": "races/bond_vs_risch_2026.html", "TN": "races/bradshaw_vs_hagerty_2026.html", "SD": "races/beaudion_vs_rounds_2026.html", "NE": "races/burbank_vs_ricketts_2026.html", "LA": "races/albares_vs_cassidy_2026.html", "MT": "races/neill_vs_daines_2026.html", "KS": "races/davis_vs_marshall_2026.html", "MS": "races/colom_vs_hyde_smith_2026.html", "SC": "races/andrews_vs_graham_2026.html", "IA": "races/turek_vs_hinson_2026.html", "FL": "races/vindman_vs_moody_2026.html", "TX": "races/talarico_vs_cornyn_2026.html", "OH": "races/brown_vs_husted_2026.html", "AK": "races/peltola_vs_sullivan_2026.html", "MI": "races/stevens_vs_rogers_2026.html", "NC": "races/cooper_vs_whatley_2026.html", "NH": "races/pappas_vs_sununu_2026.html", "GA": "races/ossoff_vs_carter_2026.html", "ME": "races/mills_vs_collins_2026.html", "MN": "races/craig_vs_white_2026.html", "NJ": "races/booker_vs_kean_2026.html", "VA": "races/warner_vs_youngkin_2026.html", "CO": "races/hickenlooper_vs_o_dea_2026.html", "NM": "races/lujan_vs_barela_2026.html", "IL": "races/stratton_vs_tracy_2026.html", "DE": "races/coons_vs_katz_2026.html", "OR": "races/merkley_vs_perkins_2026.html", "RI": "races/reed_vs_mckay_2026.html", "MA": "races/markey_vs_deaton_2026.html"};
+var _govUrls    = {"WY": "races/green_vs_degenfelder_2026.html", "AR": "races/love_vs_sanders_2026.html", "OK": "races/munson_vs_drummond_2026.html", "ID": "races/kirkham_vs_little_2026.html", "TN": "races/mccants_vs_blackburn_2026.html", "AL": "races/jones_vs_marshall_2026.html", "SD": "races/ahlers_vs_rhoden_2026.html", "NE": "races/walz_vs_pillen_2026.html", "KS": "races/holscher_vs_colyer_2026.html", "SC": "races/mcleod_vs_evette_2026.html", "TX": "races/hinojosa_vs_abbott_2026.html", "FL": "races/jolly_vs_donalds_2026.html", "OH": "races/acton_vs_ramaswamy_2026.html", "AK": "races/begich_vs_bishop_2026.html", "IA": "races/sand_vs_feenstra_2026.html", "NH": "races/kiper_vs_ayotte_2026.html", "GA": "races/bottoms_vs_carr_2026.html", "AZ": "races/hobbs_vs_biggs_2026.html", "NV": "races/ford_vs_lombardo_2026.html", "WI": "races/barnes_vs_tiffany_2026.html", "MI": "races/benson_vs_james_2026.html", "PA": "races/shapiro_vs_garrity_2026.html", "MN": "races/flanagan_vs_demuth_2026.html", "ME": "races/bellows_vs_mason_2026.html", "CO": "races/polis_vs_bottoms_2026.html", "NM": "races/haaland_vs_rodriguez_2026.html", "OR": "races/kotek_vs_drazan_2026.html", "IL": "races/pritzker_vs_bailey_2026.html", "NY": "races/hochul_vs_blakeman_2026.html", "CT": "races/lamont_vs_fazio_2026.html", "RI": "races/foulkes_vs_pelino_2026.html", "CA": "races/newsom_vs_bianco_2026.html", "VT": "races/janoo_vs_scott_2026.html", "MD": "races/moore_vs_cox_2026.html", "MA": "races/healey_vs_kennealy_2026.html"};
+
+function _attachMapClick(divId, urlMap) {
+  var el = document.getElementById(divId);
+  if (!el || typeof el.on !== 'function') return;
+  el.on('plotly_click', function(data) {
+    if (!data || !data.points || !data.points.length) return;
+    var state = data.points[0].location;
+    if (state && urlMap[state]) {
+      window.location.href = urlMap[state];
+    }
+  });
+  // Show pointer cursor over clickable states
+  el.on('plotly_hover', function(data) {
+    if (!data || !data.points || !data.points.length) return;
+    var state = data.points[0].location;
+    el.style.cursor = (state && urlMap[state]) ? 'pointer' : 'default';
+  });
+  el.on('plotly_unhover', function() {
+    el.style.cursor = 'default';
+  });
+}
+
+_attachMapClick('senate-map', _senateUrls);
+_attachMapClick('gov-map',    _govUrls);
+</script>
+</body>
+</html>

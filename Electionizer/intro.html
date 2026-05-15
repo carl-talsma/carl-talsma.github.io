@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electionizer | ML Election Forecasting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗳️</text></svg>">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Georgia, serif;
+      background-color: #fafaf7;
+      color: #1a1a2e;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #1a1a2e;
+      padding: 32px 40px 24px;
+    }
+    .brand-wordmark {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 3rem;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1;
+      margin: 0 0 6px;
+      background: linear-gradient(105deg, #e63946 0%, #9b5de5 52%, #4895ef 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .brand-tagline {
+      color: #667788;
+      font-family: Georgia, serif;
+      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin: 0 0 24px;
+    }
+    .brand-nav a {
+      margin-right: 22px;
+      color: #aabbcc;
+      font-size: 0.88rem;
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      font-family: Georgia, serif;
+    }
+    .brand-nav a:hover { color: #e63946; text-decoration: none; }
+    .portfolio-back {
+      display: block;
+      margin-top: 12px;
+      font-size: 0.73rem;
+      color: #445566;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      font-family: Georgia, serif;
+    }
+    .portfolio-back:hover { color: #8899aa; text-decoration: none; }
+    .header-divider {
+      height: 2px;
+      background: linear-gradient(90deg, #e63946 0%, #9b5de5 50%, #4895ef 100%);
+    }
+    .page-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 32px 24px 64px;
+    }
+    /* Map card styles (from index.html) */
+    .card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .map-hint {
+      font-family: Georgia, serif;
+      font-size: 0.78rem;
+      color: #888;
+      margin: 0 0 6px 0;
+      font-style: italic;
+    }
+    .legend-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 10px 0 20px 0;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      font-family: Georgia, serif;
+      color: #555;
+    }
+    .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .intro-text { margin-top: 32px; }
+    .intro-text p {
+      font-family: Georgia, serif;
+      font-size: 1rem;
+      color: #333;
+      line-height: 1.8;
+    }
+    .launch-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-family: Georgia, serif;
+      font-size: 0.95rem;
+      color: #1a1a2e;
+      text-decoration: underline;
+    }
+    .launch-link:hover { color: #e63946; }
+  </style>
+</head>
+<body>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GNBEYLLBWK"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-GNBEYLLBWK');
+</script>
+
+<header>
+  <div class="brand-wordmark">Electionizer</div>
+  <div class="brand-tagline">ML-Powered Election Forecasting &nbsp;·&nbsp; 2026 Midterms</div>
+  <nav class="brand-nav">
+    <a href="index.html">Launch App</a>
+  </nav>
+  <a class="portfolio-back" href="../index.html">← carltalsma.github.io</a>
+</header>
+
+<div class="header-divider"></div>
+
+<div class="page-body">
+
+  <script>window.PlotlyConfig = {MathJaxConfig: 'local'};</script>
+  <script charset="utf-8" src="https://cdn.plot.ly/plotly-3.4.0.min.js" integrity="sha256-KEmPoupLpFyGMyGAiOsiNDbKDKAvxXAn/W+oQa0ZAfk=" crossorigin="anonymous"></script>
+
+  <div class="card" style="padding:16px 24px 8px; margin-bottom:16px; cursor:pointer;">
+  <div>                            <div id="senate-map" class="plotly-graph-div" style="height:440px; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("senate-map")) {                    Plotly.newPlot(                        "senate-map",                        [{"colorscale":[[0.0,"#c0392b"],[0.3,"#e8a080"],[0.42,"#f0c8b8"],[0.5,"#e0ddd8"],[0.58,"#c5daf0"],[0.7,"#9dc3e6"],[1.0,"#1a6bb5"]],"hovertemplate":"%{text}\u003cextra\u003e\u003c\u002fextra\u003e","locationmode":"USA-states","locations":["AZ","CA","CT","HI","IN","MD","MO","NV","NY","ND","PA","UT","VT","WA","WI","DC"],"marker":{"line":{"color":"white","width":0.5}},"showscale":false,"text":["\u003cb\u003eArizona\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Split","\u003cb\u003eCalifornia\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eConnecticut\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eHawaii\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eIndiana\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eMaryland\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eMissouri\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eNevada\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eNew York\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eNorth Dakota\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003ePennsylvania\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Split","\u003cb\u003eUtah\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Republican","\u003cb\u003eVermont\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eWashington\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Democratic","\u003cb\u003eWisconsin\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Split","\u003cb\u003eDistrict of Columbia\u003c\u002fb\u003e\u003cbr\u003eNot up in 2026\u003cbr\u003eCurrent control: Split"],"z":[0.0,20.0,20.0,20.0,-20.0,20.0,-20.0,20.0,20.0,-20.0,0.0,-20.0,20.0,20.0,0.0,0.0],"zmax":25,"zmid":0,"zmin":-25,"type":"choropleth"},{"colorscale":[[0.0,"#c0392b"],[0.3,"#e8a080"],[0.42,"#f0c8b8"],[0.5,"#e0ddd8"],[0.58,"#c5daf0"],[0.7,"#9dc3e6"],[1.0,"#1a6bb5"]],"hovertemplate":"%{text}\u003cextra\u003e\u003c\u002fextra\u003e","locationmode":"USA-states","locations":["WY","WV","OK","AR","ID","KY","TN","SD","AL","MT","MS","LA","NE","SC","KS","OH","IA","AK","TX","FL","NC","GA","MI","ME","NH","MN","NM","CO","VA","OR","NJ","DE","IL","RI","MA"],"marker":{"line":{"color":"white","width":1.2}},"showscale":false,"text":["\u003cb\u003eWyoming\u003c\u002fb\u003e\u003cbr\u003eGreen vs Barrasso\u003cbr\u003eMargin: R+46.2%\u003cbr\u003eRating: Safe R","\u003cb\u003eWest Virginia\u003c\u002fb\u003e\u003cbr\u003eAnderson vs Capito\u003cbr\u003eMargin: R+38.5%\u003cbr\u003eRating: Safe R","\u003cb\u003eOklahoma\u003c\u002fb\u003e\u003cbr\u003eCassity vs Hern\u003cbr\u003eMargin: R+31.9%\u003cbr\u003eRating: Safe R","\u003cb\u003eArkansas\u003c\u002fb\u003e\u003cbr\u003eShoffner vs Cotton\u003cbr\u003eMargin: R+30.1%\u003cbr\u003eRating: Safe R","\u003cb\u003eIdaho\u003c\u002fb\u003e\u003cbr\u003eBond vs Risch\u003cbr\u003eMargin: R+28.2%\u003cbr\u003eRating: Safe R","\u003cb\u003eKentucky\u003c\u002fb\u003e\u003cbr\u003eBooker vs Cameron\u003cbr\u003eMargin: R+28.1%\u003cbr\u003eRating: Safe R","\u003cb\u003eTennessee\u003c\u002fb\u003e\u003cbr\u003eBradshaw vs Hagerty\u003cbr\u003eMargin: R+26.1%\u003cbr\u003eRating: Safe R","\u003cb\u003eSouth Dakota\u003c\u002fb\u003e\u003cbr\u003eBeaudion vs Rounds\u003cbr\u003eMargin: R+25.1%\u003cbr\u003eRating: Safe R","\u003cb\u003eAlabama\u003c\u002fb\u003e\u003cbr\u003eLarriett vs Tuberville\u003cbr\u003eMargin: R+23.5%\u003cbr\u003eRating: Safe R","\u003cb\u003eMontana\u003c\u002fb\u003e\u003cbr\u003eNeill vs Daines\u003cbr\u003eMargin: R+21.3%\u003cbr\u003eRating: Safe R","\u003cb\u003eMississippi\u003c\u002fb\u003e\u003cbr\u003eColom vs Hyde-Smith\u003cbr\u003eMargin: R+20.0%\u003cbr\u003eRating: Safe R","\u003cb\u003eLouisiana\u003c\u002fb\u003e\u003cbr\u003eAlbares vs Cassidy\u003cbr\u003eMargin: R+16.4%\u003cbr\u003eRating: Safe R","\u003cb\u003eNebraska\u003c\u002fb\u003e\u003cbr\u003eBurbank vs Ricketts\u003cbr\u003eMargin: R+16.0%\u003cbr\u003eRating: Safe R","\u003cb\u003eSouth Carolina\u003c\u002fb\u003e\u003cbr\u003eAndrews vs Graham\u003cbr\u003eMargin: R+11.7%\u003cbr\u003eRating: Safe R","\u003cb\u003eKansas\u003c\u002fb\u003e\u003cbr\u003eDavis vs Marshall\u003cbr\u003eMargin: R+10.3%\u003cbr\u003eRating: Safe R","\u003cb\u003eOhio\u003c\u002fb\u003e\u003cbr\u003eBrown vs Husted\u003cbr\u003eMargin: R+9.7%\u003cbr\u003eRating: Likely R","\u003cb\u003eIowa\u003c\u002fb\u003e\u003cbr\u003eTurek vs Hinson\u003cbr\u003eMargin: R+6.4%\u003cbr\u003eRating: Likely R","\u003cb\u003eAlaska\u003c\u002fb\u003e\u003cbr\u003ePeltola vs Sullivan\u003cbr\u003eMargin: R+5.8%\u003cbr\u003eRating: Likely R","\u003cb\u003eTexas\u003c\u002fb\u003e\u003cbr\u003eTalarico vs Cornyn\u003cbr\u003eMargin: R+4.4%\u003cbr\u003eRating: Lean R","\u003cb\u003eFlorida\u003c\u002fb\u003e\u003cbr\u003eVindman vs Moody\u003cbr\u003eMargin: R+3.9%\u003cbr\u003eRating: Lean R","\u003cb\u003eNorth Carolina\u003c\u002fb\u003e\u003cbr\u003eCooper vs Whatley\u003cbr\u003eMargin: D+1.9%\u003cbr\u003eRating: Toss-up","\u003cb\u003eGeorgia\u003c\u002fb\u003e\u003cbr\u003eOssoff vs Carter\u003cbr\u003eMargin: D+3.9%\u003cbr\u003eRating: Lean D","\u003cb\u003eMichigan\u003c\u002fb\u003e\u003cbr\u003eStevens vs Rogers\u003cbr\u003eMargin: D+5.7%\u003cbr\u003eRating: Likely D","\u003cb\u003eMaine\u003c\u002fb\u003e\u003cbr\u003eMills vs Collins\u003cbr\u003eMargin: D+6.1% \u26a0\u003cbr\u003eRating: Likely D","\u003cb\u003eNew Hampshire\u003c\u002fb\u003e\u003cbr\u003ePappas vs Sununu\u003cbr\u003eMargin: D+7.1% \u26a0\u003cbr\u003eRating: Likely D","\u003cb\u003eMinnesota\u003c\u002fb\u003e\u003cbr\u003eCraig vs White\u003cbr\u003eMargin: D+7.5%\u003cbr\u003eRating: Likely D","\u003cb\u003eNew Mexico\u003c\u002fb\u003e\u003cbr\u003eLujan vs Barela\u003cbr\u003eMargin: D+8.5%\u003cbr\u003eRating: Likely D","\u003cb\u003eColorado\u003c\u002fb\u003e\u003cbr\u003eHickenlooper vs O'Dea\u003cbr\u003eMargin: D+11.4% \u26a0\u003cbr\u003eRating: Safe D","\u003cb\u003eVirginia\u003c\u002fb\u003e\u003cbr\u003eWarner vs Youngkin\u003cbr\u003eMargin: D+12.8%\u003cbr\u003eRating: Safe D","\u003cb\u003eOregon\u003c\u002fb\u003e\u003cbr\u003eMerkley vs Perkins\u003cbr\u003eMargin: D+13.4%\u003cbr\u003eRating: Safe D","\u003cb\u003eNew Jersey\u003c\u002fb\u003e\u003cbr\u003eBooker vs Kean\u003cbr\u003eMargin: D+15.2%\u003cbr\u003eRating: Safe D","\u003cb\u003eDelaware\u003c\u002fb\u003e\u003cbr\u003eCoons vs Katz\u003cbr\u003eMargin: D+16.8%\u003cbr\u003eRating: Safe D","\u003cb\u003eIllinois\u003c\u002fb\u003e\u003cbr\u003eStratton vs Tracy\u003cbr\u003eMargin: D+16.9%\u003cbr\u003eRating: Safe D","\u003cb\u003eRhode Island\u003c\u002fb\u003e\u003cbr\u003eReed vs McKay\u003cbr\u003eMargin: D+26.3%\u003cbr\u003eRating: Safe D","\u003cb\u003eMassachusetts\u003c\u002fb\u003e\u003cbr\u003eMarkey vs Deaton\u003cbr\u003eMargin: D+41.6%\u003cbr\u003eRating: Safe D"],"z":[-46.189523282555086,-38.48513587494056,-31.915773664230073,-30.148785883922415,-28.176096956091627,-28.057895144108883,-26.084818616464617,-25.07371533415808,-23.536670128998693,-21.29106254651593,-20.021096438910007,-16.36741751678806,-16.001320440721706,-11.744406031728218,-10.264419094852393,-9.71243282560203,-6.439015428954491,-5.779903916790616,-4.427750950482839,-3.885269975993012,1.9404954721687984,3.905520402476064,5.653500065293883,6.092082887221515,7.10153696928063,7.532048397136272,8.457709890834487,11.416407618202356,12.8217730909424,13.36498527402631,15.182945382457248,16.803626760677894,16.911336808192964,26.283661369577587,41.643759213796386],"zmax":25,"zmid":0,"zmin":-25,"type":"choropleth"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermapbox":[{"type":"scattermapbox","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05},"mapbox":{"style":"light"}}},"geo":{"projection":{"type":"albers usa"},"scope":"usa","showlakes":false,"bgcolor":"rgba(0,0,0,0)","landcolor":"#f5f2ec","coastlinecolor":"#ccc"},"margin":{"l":0,"r":0,"t":0,"b":0},"font":{"family":"Georgia, serif","color":"#1a1a2e"},"paper_bgcolor":"rgba(0,0,0,0)","plot_bgcolor":"rgba(0,0,0,0)","height":440},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+  </div>
+
+  <div class="intro-text">
+    <p>Welcome to the Electionizer Application!</p>
+    <p>Electionizer is a pet project of mine to predict election outcomes based on a variety of data. Electionizer uses machine learning algorithms to analyze and forecast election results using polling data, demographic information, historical voting patterns, and Google search trends for candidates.
+      I'll be updating polls periodically and posting updates on model performance, predictions, and insights in the lead up to the 2026 midterm elections. Check out any updates below and feel free to reach out if you have any questions or suggestions for the project!
+    </p>
+    <!-- REFRESH_UPDATE_START -->
+    <div style="margin-top:20px; padding:16px 20px; background:#f0f4ff; border-left:3px solid #4895ef; border-radius:0 6px 6px 0; font-family:Georgia,serif; font-size:0.92rem; color:#333; line-height:1.75;"><p style="margin:0 0 4px 0;"><strong>Model updated May 14, 2026.</strong> Democrats are currently favored in 27 of 70 contested races (18 Safe D, 6 Likely D, 3 Lean D), Republicans in 35 (26 Safe R, 8 Likely R, 1 Lean R), with 8 races rated as a Toss-up. No significant forecast changes in this update.</p>
+<div style="margin-top:16px;">
+  <p style="font-family:'Playfair Display',Georgia,serif; font-size:0.85rem; font-weight:700;
+            text-transform:uppercase; letter-spacing:0.07em; color:#1a1a2e;
+            border-bottom:2px solid #1a1a2e; padding-bottom:4px; margin-bottom:8px;">
+    Race-Level Changes</p>
+  <div style="font-family:Georgia,serif; font-size:0.9rem;">
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Amy Acton vs Vivek Ramaswamy (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+7.8%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+24 new polls (latest: Apr 14)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Annie Andrews vs Lindsey Graham (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+12.3%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+4 new polls (latest: Mar 01)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Mandela Barnes vs Tom Tiffany (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+0.4%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+6 new polls (latest: Mar 19)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Tom Begich vs Click Bishop (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+7.3%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+10 new polls (latest: Jul 27)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Jocelyn Benson vs John James (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+0.8%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+36 new polls (latest: May 01)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Sherrod Brown vs Jon Husted (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+7.5%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+24 new polls (latest: Apr 21)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Scott Colom vs Cindy Hyde-Smith (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+13.6%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+6 new polls (latest: Apr 12)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Roy Cooper vs Michael Whatley (Senate, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+1.3%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+36 new polls (latest: Apr 24)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Aaron Ford vs Joe Lombardo (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+0.9%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+10 new polls (latest: Mar 13)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Maura Healey vs Mike Kennealy (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+35.2%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+10 new polls (latest: Apr 20)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Gina Hinojosa vs Greg Abbott (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+11.1%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+14 new polls (latest: Apr 20)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Katie Hobbs vs Andy Biggs (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+1.1%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+22 new polls (latest: Apr 24)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Kathy Hochul vs Bruce Blakeman (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+15.3%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+28 new polls (latest: Apr 30)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">David Jolly vs Byron Donalds (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+8.2%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+22 new polls (latest: Apr 13)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Jon Kiper vs Kelly Ayotte (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+1.2%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+6 new polls (latest: Mar 18)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Ed Markey vs John Deaton (Senate, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+34.9%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+10 new polls (latest: Apr 20)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Janet Mills vs Susan Collins (Senate, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+5.7%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+24 new polls (latest: Apr 09)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Reilly Neill vs Steve Daines (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+14.0%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+7 new polls (latest: Feb 18)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Jon Ossoff vs Buddy Carter (Senate, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+2.3%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+16 new polls (latest: Apr 09)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Chris Pappas vs John Sununu (Senate, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+2.2%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+24 new polls (latest: Apr 21)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Mary Peltola vs Dan Sullivan (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+5.0%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+24 new polls (latest: Apr 19)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Rob Sand vs Randy Feenstra (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+6.7%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+6 new polls (latest: Apr 09)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Josh Shapiro vs Stacy Garrity (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+3.1%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+10 new polls (latest: Mar 29)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Haley Stevens vs Mike Rogers (Senate, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+1.3%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+24 new polls (latest: May 01)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">James Talarico vs John Cornyn (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+8.3%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+18 new polls (latest: Apr 20)</li>
+  </ul>
+</div>
+  </div>
+</div></div>
+    <!-- REFRESH_UPDATE_END -->
+    <a class="launch-link" href="index.html">Go to the Electionizer Application...</a>
+  </div>
+
+</div>
+
+</body>
+</html>
