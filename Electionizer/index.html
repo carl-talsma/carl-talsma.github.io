@@ -1545,6 +1545,12 @@ function switchTab(name) {
   document.querySelectorAll('.tab-btn').forEach(function(b) {
     b.classList.toggle('active', b.getAttribute('data-tab') === name);
   });
+  // Resize Plotly charts in the newly visible tab so they fill their container
+  var prefix = name === 'senate' ? 'senate' : 'gov';
+  [prefix + '-bar', prefix + '-map'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el && typeof Plotly !== 'undefined') Plotly.Plots.resize(el);
+  });
 }
 
 var _senateUrls = {"WV": "races/anderson_vs_capito_2026.html", "WY": "races/green_vs_barrasso_2026.html", "KY": "races/booker_vs_cameron_2026.html", "AR": "races/shoffner_vs_cotton_2026.html", "OK": "races/cassity_vs_hern_2026.html", "AL": "races/larriett_vs_tuberville_2026.html", "ID": "races/bond_vs_risch_2026.html", "TN": "races/bradshaw_vs_hagerty_2026.html", "SD": "races/beaudion_vs_rounds_2026.html", "NE": "races/burbank_vs_ricketts_2026.html", "LA": "races/albares_vs_cassidy_2026.html", "MT": "races/neill_vs_daines_2026.html", "KS": "races/davis_vs_marshall_2026.html", "MS": "races/colom_vs_hyde_smith_2026.html", "SC": "races/andrews_vs_graham_2026.html", "IA": "races/turek_vs_hinson_2026.html", "FL": "races/vindman_vs_moody_2026.html", "TX": "races/talarico_vs_cornyn_2026.html", "OH": "races/brown_vs_husted_2026.html", "AK": "races/peltola_vs_sullivan_2026.html", "MI": "races/stevens_vs_rogers_2026.html", "NC": "races/cooper_vs_whatley_2026.html", "NH": "races/pappas_vs_sununu_2026.html", "GA": "races/ossoff_vs_carter_2026.html", "ME": "races/mills_vs_collins_2026.html", "MN": "races/craig_vs_white_2026.html", "NJ": "races/booker_vs_kean_2026.html", "VA": "races/warner_vs_youngkin_2026.html", "CO": "races/hickenlooper_vs_o_dea_2026.html", "NM": "races/lujan_vs_barela_2026.html", "IL": "races/stratton_vs_tracy_2026.html", "DE": "races/coons_vs_katz_2026.html", "OR": "races/merkley_vs_perkins_2026.html", "RI": "races/reed_vs_mckay_2026.html", "MA": "races/markey_vs_deaton_2026.html"};
