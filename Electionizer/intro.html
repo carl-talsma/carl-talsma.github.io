@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Electionizer | ML Election Forecasting</title>
+  <title>TideShift | ML Election Forecasting</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗳️</text></svg>">
@@ -27,11 +27,9 @@
       letter-spacing: -1.5px;
       line-height: 1;
       margin: 0 0 6px;
-      background: linear-gradient(105deg, #e63946 0%, #9b5de5 52%, #4895ef 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
+    .brand-wordmark .tide  { color: #5b9bd5; }
+    .brand-wordmark .shift { color: #e0674f; }
     .brand-tagline {
       color: #667788;
       font-family: Georgia, serif;
@@ -49,7 +47,7 @@
       letter-spacing: 0.07em;
       font-family: Georgia, serif;
     }
-    .brand-nav a:hover { color: #e63946; text-decoration: none; }
+    .brand-nav a:hover { color: #e0674f; text-decoration: none; }
     .portfolio-back {
       display: block;
       margin-top: 12px;
@@ -62,7 +60,7 @@
     .portfolio-back:hover { color: #8899aa; text-decoration: none; }
     .header-divider {
       height: 2px;
-      background: linear-gradient(90deg, #e63946 0%, #9b5de5 50%, #4895ef 100%);
+      background: linear-gradient(90deg, #5b9bd5 0%, #e0674f 100%);
     }
     .page-body {
       max-width: 1100px;
@@ -114,7 +112,7 @@
       color: #1a1a2e;
       text-decoration: underline;
     }
-    .launch-link:hover { color: #e63946; }
+    .launch-link:hover { color: #e0674f; }
   </style>
 </head>
 <body>
@@ -129,7 +127,7 @@
 </script>
 
 <header>
-  <div class="brand-wordmark">Electionizer</div>
+  <div class="brand-wordmark"><span class="tide">Tide</span><span class="shift">Shift</span></div>
   <div class="brand-tagline">ML-Powered Election Forecasting &nbsp;·&nbsp; 2026 Midterms</div>
   <nav class="brand-nav">
     <a href="index.html">Launch App</a>
@@ -149,12 +147,12 @@
   </div>
 
   <div class="intro-text">
-    <p>Welcome to the Electionizer Application!</p>
-    <p>Electionizer is a pet project of mine to predict election outcomes based on a variety of data. Electionizer uses machine learning algorithms to analyze and forecast election results using polling data, demographic information, historical voting patterns, and Google search trends for candidates.
+    <p>Welcome to the TideShift Application!</p>
+    <p>TideShift is a pet project of mine to predict election outcomes based on a variety of data. TideShift uses machine learning algorithms to analyze and forecast election results using polling data, demographic information, historical voting patterns, and Google search trends for candidates.
       I'll be updating polls periodically and posting updates on model performance, predictions, and insights in the lead up to the 2026 midterm elections. Check out any updates below and feel free to reach out if you have any questions or suggestions for the project!
     </p>
     <!-- REFRESH_UPDATE_START -->
-    <div style="margin-top:20px; padding:16px 20px; background:#f0f4ff; border-left:3px solid #4895ef; border-radius:0 6px 6px 0; font-family:Georgia,serif; font-size:0.92rem; color:#333; line-height:1.75;"><p style="margin:0 0 4px 0;"><strong>Model updated May 14, 2026.</strong> Democrats are currently favored in 27 of 70 contested races (18 Safe D, 6 Likely D, 3 Lean D), Republicans in 35 (26 Safe R, 8 Likely R, 1 Lean R), with 8 races rated as a Toss-up. No significant forecast changes in this update.</p>
+    <div style="margin-top:20px; padding:16px 20px; background:#f0f4ff; border-left:3px solid #4895ef; border-radius:0 6px 6px 0; font-family:Georgia,serif; font-size:0.92rem; color:#333; line-height:1.75;"><p style="margin:0 0 4px 0;"><strong>Model updated October 31, 2026.</strong> Democrats are currently favored in 31 of 70 contested races (24 Safe D, 5 Likely D, 2 Lean D), Republicans in 30 (21 Safe R, 6 Likely R, 3 Lean R), with 9 races rated as a Toss-up. No significant forecast changes in this update.</p>
 <div style="margin-top:16px;">
   <p style="font-family:'Playfair Display',Georgia,serif; font-size:0.85rem; font-weight:700;
             text-transform:uppercase; letter-spacing:0.07em; color:#1a1a2e;
@@ -163,233 +161,539 @@
   <div style="font-family:Georgia,serif; font-size:0.9rem;">
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Todd Achilles vs Jim Risch (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+19.1%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+20 new polls (latest: Oct 22)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
     <span style="font-weight:700; color:#1a1a2e;">Amy Acton vs Vivek Ramaswamy (Governor, 2026)</span>
-    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+7.8%</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+1.3%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+24 new polls (latest: Apr 14)</li>
+    <li style='margin:3px 0;'>+84 new polls (latest: Oct 26)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
-    <span style="font-weight:700; color:#1a1a2e;">Annie Andrews vs Lindsey Graham (Senate, 2026)</span>
-    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+12.3%</span>
+    <span style="font-weight:700; color:#1a1a2e;">Dan Ahlers vs Larry Rhoden (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+21.0%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+4 new polls (latest: Mar 01)</li>
+    <li style='margin:3px 0;'>+4 new polls (latest: Oct 14)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
-    <span style="font-weight:700; color:#1a1a2e;">Mandela Barnes vs Tom Tiffany (Governor, 2026)</span>
-    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+0.4%</span>
+    <span style="font-weight:700; color:#1a1a2e;">Kurt Alme vs Seth Bodnar (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+21.9%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+6 new polls (latest: Mar 19)</li>
+    <li style='margin:3px 0;'>+45 new polls (latest: Oct 23)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
-    <span style="font-weight:700; color:#1a1a2e;">Tom Begich vs Click Bishop (Governor, 2026)</span>
-    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+7.3%</span>
+    <span style="font-weight:700; color:#1a1a2e;">Annie Andrews vs Darline Graham (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+6.7%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+10 new polls (latest: Jul 27)</li>
+    <li style='margin:3px 0;'>+34 new polls (latest: Oct 29)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Kelly Ayotte vs Cinde Warmington (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+12.0%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+30 new polls (latest: Oct 23)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Andy Barr vs Charles Booker (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+17.6%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+4 new polls (latest: Aug 27)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Xavier Becerra vs Steve Hilton (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+29.6%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+123 new polls (latest: May 31)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Brian Bengs vs Mike Rounds (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+15.0%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+34 new polls (latest: Oct 26)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
     <span style="font-weight:700; color:#1a1a2e;">Jocelyn Benson vs John James (Governor, 2026)</span>
-    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+0.8%</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+7.4%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+36 new polls (latest: May 01)</li>
+    <li style='margin:3px 0;'>+86 new polls (latest: Oct 27)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Marquita Bradshaw vs Bill Hagerty (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+25.7%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+2 new polls (latest: Aug 26)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
     <span style="font-weight:700; color:#1a1a2e;">Sherrod Brown vs Jon Husted (Senate, 2026)</span>
-    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+7.5%</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+0.6%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+24 new polls (latest: Apr 21)</li>
+    <li style='margin:3px 0;'>+104 new polls (latest: Oct 26)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Mike Collins vs Jon Ossoff (Senate, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+10.3%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+58 new polls (latest: Oct 23)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
     <span style="font-weight:700; color:#1a1a2e;">Scott Colom vs Cindy Hyde-Smith (Senate, 2026)</span>
-    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+13.6%</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+10.5%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+6 new polls (latest: Apr 12)</li>
+    <li style='margin:3px 0;'>+12 new polls (latest: Oct 22)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
     <span style="font-weight:700; color:#1a1a2e;">Roy Cooper vs Michael Whatley (Senate, 2026)</span>
-    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+1.3%</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+10.3%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+36 new polls (latest: Apr 24)</li>
+    <li style='margin:3px 0;'>+138 new polls (latest: Oct 25)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">David Crowley vs Tom Tiffany (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+3.7%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+32 new polls (latest: Oct 23)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Jamie Davis vs Julia Letlow (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+11.8%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+6 new polls (latest: Oct 29)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Peggy Flanagan vs Michele Tafoya (Senate, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+4.8%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+48 new polls (latest: Oct 28)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
     <span style="font-weight:700; color:#1a1a2e;">Aaron Ford vs Joe Lombardo (Governor, 2026)</span>
-    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+0.9%</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+2.0%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+10 new polls (latest: Mar 13)</li>
+    <li style='margin:3px 0;'>+36 new polls (latest: Oct 28)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
-    <span style="font-weight:700; color:#1a1a2e;">Maura Healey vs Mike Kennealy (Governor, 2026)</span>
-    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+35.2%</span>
+    <span style="font-weight:700; color:#1a1a2e;">Helena Foulkes vs Aaron Guckian (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+37.5%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+10 new polls (latest: Apr 20)</li>
+    <li style='margin:3px 0;'>+19 new polls (latest: Oct 11)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Jerri Green vs Marsha Blackburn (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+19.0%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+14 new polls (latest: Oct 26)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Deb Haaland vs Gregg Hull (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+14.9%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+10 new polls (latest: Oct 09)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Adam Hamilton vs Roger Marshall (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+1.4%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+44 new polls (latest: Oct 28)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Maura Healey vs Michael Minogue (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+26.4%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+28 new polls (latest: Oct 18)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
     <span style="font-weight:700; color:#1a1a2e;">Gina Hinojosa vs Greg Abbott (Governor, 2026)</span>
-    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+11.1%</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+3.9%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+14 new polls (latest: Apr 20)</li>
+    <li style='margin:3px 0;'>+142 new polls (latest: Oct 30)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
     <span style="font-weight:700; color:#1a1a2e;">Katie Hobbs vs Andy Biggs (Governor, 2026)</span>
-    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+1.1%</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+8.3%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+22 new polls (latest: Apr 24)</li>
+    <li style='margin:3px 0;'>+64 new polls (latest: Oct 29)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
     <span style="font-weight:700; color:#1a1a2e;">Kathy Hochul vs Bruce Blakeman (Governor, 2026)</span>
-    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+15.3%</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+15.4%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+28 new polls (latest: Apr 30)</li>
+    <li style='margin:3px 0;'>+70 new polls (latest: Oct 25)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Cindy Holscher vs Ty Masterson (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+4.7%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+22 new polls (latest: Oct 28)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Rick Jackson vs Keisha Lance Bottoms (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+0.8%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+52 new polls (latest: Oct 27)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Troy Jackson vs Susan Collins (Senate, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+0.7%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+70 new polls (latest: Oct 27)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Amanda Janoo vs Phil Scott (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+8.2%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+18 new polls (latest: Oct 25)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Jermaine Johnson vs Alan Wilson (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+16.8%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+18 new polls (latest: Oct 26)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
     <span style="font-weight:700; color:#1a1a2e;">David Jolly vs Byron Donalds (Governor, 2026)</span>
-    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+8.2%</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+5.2%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+22 new polls (latest: Apr 13)</li>
+    <li style='margin:3px 0;'>+84 new polls (latest: Oct 27)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
-    <span style="font-weight:700; color:#1a1a2e;">Jon Kiper vs Kelly Ayotte (Governor, 2026)</span>
-    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+1.2%</span>
+    <span style="font-weight:700; color:#1a1a2e;">Doug Jones vs Tommy Tuberville (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+15.1%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+6 new polls (latest: Mar 18)</li>
+    <li style='margin:3px 0;'>+12 new polls (latest: Oct 24)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Amy Klobuchar vs Lisa Demuth (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+12.6%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+30 new polls (latest: Oct 28)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Tina Kotek vs Christine Drazan (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+5.9%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+16 new polls (latest: Oct 04)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Jonathan Kreiss-Tomkins vs Dave Bronson (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+38.5%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+37 new polls (latest: Oct 25)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Ned Lamont vs Ryan Fazio (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+20.7%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+28 new polls (latest: Oct 12)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Fredrick Love vs Sarah Huckabee Sanders (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+22.0%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+4 new polls (latest: Oct 13)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
     <span style="font-weight:700; color:#1a1a2e;">Ed Markey vs John Deaton (Senate, 2026)</span>
-    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+34.9%</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+35.5%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+10 new polls (latest: Apr 20)</li>
+    <li style='margin:3px 0;'>+30 new polls (latest: Oct 18)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
-    <span style="font-weight:700; color:#1a1a2e;">Janet Mills vs Susan Collins (Senate, 2026)</span>
-    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+5.7%</span>
+    <span style="font-weight:700; color:#1a1a2e;">Cyndi Munson vs Mike Mazzei (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+13.8%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+24 new polls (latest: Apr 09)</li>
+    <li style='margin:3px 0;'>+10 new polls (latest: Oct 13)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
-    <span style="font-weight:700; color:#1a1a2e;">Reilly Neill vs Steve Daines (Senate, 2026)</span>
-    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+14.0%</span>
+    <span style="font-weight:700; color:#1a1a2e;">Angie Nixon vs Ashley Moody (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+8.4%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+7 new polls (latest: Feb 18)</li>
+    <li style='margin:3px 0;'>+54 new polls (latest: Oct 27)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
-    <span style="font-weight:700; color:#1a1a2e;">Jon Ossoff vs Buddy Carter (Senate, 2026)</span>
-    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+2.3%</span>
+    <span style="font-weight:700; color:#1a1a2e;">Dan Osborn vs Pete Ricketts (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+6.8%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+16 new polls (latest: Apr 09)</li>
+    <li style='margin:3px 0;'>+46 new polls (latest: Oct 29)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
     <span style="font-weight:700; color:#1a1a2e;">Chris Pappas vs John Sununu (Senate, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+7.4%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+62 new polls (latest: Oct 23)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Mary Peltola vs Dan S. Sullivan (Senate, 2026)</span>
     <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+2.2%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+24 new polls (latest: Apr 21)</li>
+    <li style='margin:3px 0;'>+62 new polls (latest: Oct 29)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
-    <span style="font-weight:700; color:#1a1a2e;">Mary Peltola vs Dan Sullivan (Senate, 2026)</span>
-    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+5.0%</span>
+    <span style="font-weight:700; color:#1a1a2e;">Terri Pickens vs Brad Little (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+25.8%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+24 new polls (latest: Apr 19)</li>
+    <li style='margin:3px 0;'>+9 new polls (latest: Oct 22)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
-    <span style="font-weight:700; color:#1a1a2e;">Rob Sand vs Randy Feenstra (Governor, 2026)</span>
-    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+6.7%</span>
+    <span style="font-weight:700; color:#1a1a2e;">J.B. Pritzker vs Darren Bailey (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+22.3%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+6 new polls (latest: Apr 09)</li>
+    <li style='margin:3px 0;'>+6 new polls (latest: Oct 22)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Jack Reed vs Raymond McKay (Senate, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+34.5%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+12 new polls (latest: Oct 11)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Mike Rogers vs Abdul El-Sayed (Senate, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+4.4%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+158 new polls (latest: Oct 29)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Rob Sand vs Zach Lahn (Governor, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+5.8%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+50 new polls (latest: Oct 28)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
     <span style="font-weight:700; color:#1a1a2e;">Josh Shapiro vs Stacy Garrity (Governor, 2026)</span>
-    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+3.1%</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+29.3%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+10 new polls (latest: Mar 29)</li>
+    <li style='margin:3px 0;'>+50 new polls (latest: Oct 21)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
-    <span style="font-weight:700; color:#1a1a2e;">Haley Stevens vs Mike Rogers (Senate, 2026)</span>
-    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+1.3%</span>
+    <span style="font-weight:700; color:#1a1a2e;">Hallie Shoffner vs Tom Cotton (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+16.0%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+24 new polls (latest: May 01)</li>
+    <li style='margin:3px 0;'>+12 new polls (latest: Oct 13)</li>
   </ul>
 </div>
 <div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
   <div style="display:flex; justify-content:space-between; align-items:baseline;">
-    <span style="font-weight:700; color:#1a1a2e;">James Talarico vs John Cornyn (Senate, 2026)</span>
-    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+8.3%</span>
+    <span style="font-weight:700; color:#1a1a2e;">Juliana Stratton vs Don Tracy (Senate, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+18.5%</span>
   </div>
   <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
-    <li style='margin:3px 0;'>+18 new polls (latest: Apr 20)</li>
+    <li style='margin:3px 0;'>+4 new polls (latest: Oct 20)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">James Talarico vs Ken Paxton (Senate, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+0.5%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+170 new polls (latest: Oct 30)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">N'Kiya Thomas vs Kevin Hern (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+32.7%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+2 new polls (latest: Aug 06)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Josh Turek vs Ashley Hinson (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+1.2%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+90 new polls (latest: Oct 28)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Lynne Walz vs Jim Pillen (Governor, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+8.6%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+34 new polls (latest: Oct 29)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Mark Warner vs Bert Mizusawa (Senate, 2026)</span>
+    <span style="font-weight:700; color:#1a6bb5; white-space:nowrap; margin-left:16px;">D+23.8%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+4 new polls (latest: Jun 16)</li>
+  </ul>
+</div>
+<div style="border-bottom:1px solid #e8e4dc; padding:10px 0;">
+  <div style="display:flex; justify-content:space-between; align-items:baseline;">
+    <span style="font-weight:700; color:#1a1a2e;">Everett Wess vs Barry Moore (Senate, 2026)</span>
+    <span style="font-weight:700; color:#c0392b; white-space:nowrap; margin-left:16px;">R+22.2%</span>
+  </div>
+  <ul style="margin:6px 0 0 18px; padding:0; font-size:0.88rem; color:#444; list-style:disc;">
+    <li style='margin:3px 0;'>+10 new polls (latest: Oct 24)</li>
   </ul>
 </div>
   </div>
 </div></div>
     <!-- REFRESH_UPDATE_END -->
-    <a class="launch-link" href="index.html">Go to the Electionizer Application...</a>
+    <a class="launch-link" href="index.html">Go to the TideShift Application...</a>
   </div>
 
 </div>
